@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CalendarLib</string>
+    <string name="sans_serif" translatable="false">sans-serif</string>
+</resources>

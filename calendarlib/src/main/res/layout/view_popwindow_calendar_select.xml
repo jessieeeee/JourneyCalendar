@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:background="@color/default_bg"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            style="@style/weekName"
+            android:text="日" />
+
+        <TextView
+            style="@style/weekName"
+            android:text="一" />
+
+        <TextView
+            style="@style/weekName"
+            android:text="二" />
+
+        <TextView
+            style="@style/weekName"
+            android:text="三" />
+
+        <TextView
+            style="@style/weekName"
+            android:text="四" />
+
+        <TextView
+            style="@style/weekName"
+            android:text="五" />
+
+        <TextView
+            style="@style/weekName"
+            android:text="六" />
+    </LinearLayout>
+
+    <journeycalendar.jessie.com.calendarlib.journey.all.DayPickerView
+        android:id="@+id/pop_pickerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/default_bg"
+        app:colorCurrentDay="@color/default_light_gray"
+        app:colorDayName="@color/default_light_gray"
+        app:colorMonthName="@color/default_blue"
+        app:colorNormalDay="@color/default_black"
+        app:colorPreviousDay="@color/default_light_gray"
+        app:colorSelectedDayBackground="@color/default_blue"
+        app:colorSelectedDayText="@color/white"
+        app:currentDaySelected="true"
+        app:drawRoundRect="false"
+        app:enablePreviousDay="true"
+        app:firstMonth="january"
+        app:lastMonth="december"
+        app:stackFromEnd="true"
+        app:textSizeDay="12sp"
+        app:textSizeDayName="12sp"
+        app:textSizeMonth="10sp">
+
+    </journeycalendar.jessie.com.calendarlib.journey.all.DayPickerView>
+
+
+</LinearLayout>

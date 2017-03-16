@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_journey"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_bar"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:src="@drawable/title_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_centerInParent="true"
+            android:text="我的行程"
+            android:textColor="@color/default_blue"/>
+
+        <TextView
+            android:layout_marginRight="12dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/text_today"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
+            android:textColor="@color/default_blue"
+            android:textSize="14dp"
+            android:text="今天" />
+    </RelativeLayout>
+    <!--日历-->
+    <LinearLayout
+        android:id="@+id/journey_contentPager"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="71dp"
+            android:layout_height="92dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="21dp">
+
+            <LinearLayout
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/journey_month"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="12"
+                        android:textColor="@color/default_blue"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@id/journey_month"
+                        android:layout_marginLeft="2dp"
+                        android:layout_toRightOf="@id/journey_month"
+                        android:gravity="center"
+                        android:text="月"
+                        android:textColor="@color/default_black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/journey_month_click"
+                    android:layout_width="match_parent"
+                    android:layout_height="18dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/text_blue_dark_round_all_circle"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="月份"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:layout_width="0.3dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/default_line" />
+
+
+        <journeycalendar.jessie.com.calendarlib.journey.week.WeekCalendar
+            android:id="@+id/weekCalendar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:dayNameLength="singleLetter"
+            app:daysTextColor="@color/default_black"
+            app:daysTextSize="14sp"
+            app:numOfPages="150"
+            app:selectedBgColor="@color/default_blue"
+            app:todaysDateBgColor="@color/default_blue"
+            app:todaysDateTextColor="@color/default_blue"
+            app:weekTextColor="@color/default_gray"
+            app:weekTextSize="12sp">
+
+        </journeycalendar.jessie.com.calendarlib.journey.week.WeekCalendar>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/default_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="12dp">
+
+        <ImageView
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/default_blue" />
+
+        <TextView
+            android:id="@+id/journey_data_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:gravity="center"
+            android:text="2016年12月12号"
+            android:textColor="@color/default_black"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <journeycalendar.jessie.com.journeycalendar.EmptyRecyclerView
+            android:id="@+id/journey_events"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </journeycalendar.jessie.com.journeycalendar.EmptyRecyclerView>
+
+
+        <include layout="@layout/default_page" />
+    </RelativeLayout>
+</LinearLayout>
+

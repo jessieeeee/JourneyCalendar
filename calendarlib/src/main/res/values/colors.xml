@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="default_light_gray">#999999</color>
+    <color name="default_orange">#FF8400</color>
+    <color name="white">#ffffff</color>
+    <color name="default_black">#333333</color>
+    <color name="normal_day">#ff999999</color>
+    <color name="selected_day_background">#E75F49</color>
+    <color name="selected_day_text">#fff2f2f2</color>
+    <color name="default_blue">#01b5c6</color>
+    <color name="default_bg">#f2f2f2</color>
+</resources>

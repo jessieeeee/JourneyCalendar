@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ly_default"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/default_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+
+    <ImageView
+        android:id="@+id/img_default_page"
+        android:layout_width="57dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/meiyouxingcheng" />
+
+    <TextView
+        android:id="@+id/text_default_page"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:lineSpacingExtra="5dp"
+        android:text="今天没有行程安排哟~\n去做点自己喜欢的事情吧^O^"
+        android:textColor="@color/default_gray"
+        android:textSize="14sp" />
+
+</LinearLayout>
