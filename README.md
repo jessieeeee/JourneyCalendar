@@ -1,6 +1,7 @@
 # JourneyCalendar
-##support 
-###week and month calendar
+- ![image](https://github.com/jessieeeee/JourneyCalendar/blob/master/sample.gif)
+## support 
+### week and month calendar
 ## Using library in your application
 ### Step 1. Add the JitPack repository to your build file
 Add it in your root build.gradle at the end of repositories:
