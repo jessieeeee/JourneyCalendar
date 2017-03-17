@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 DateTime dateTime=new DateTime(calendar);
                 clickDateTime=dateTime;
                 weekCalendar.setSelectedDate(dateTime);
+                journeyListAdapter.setData(setCurJourneyList(dateTime.toDate()));//设置当天的行程数据
                 preview.dismissPop();
             }
         });
