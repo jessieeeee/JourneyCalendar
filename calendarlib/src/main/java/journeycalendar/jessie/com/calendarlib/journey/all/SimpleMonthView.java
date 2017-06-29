@@ -27,13 +27,13 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
 import android.text.format.Time;
@@ -77,7 +77,7 @@ class SimpleMonthView extends View {
 
     protected int mPadding = dip2px(getContext(),10);
 
-//    private String mMonthTitleTypeface;//月份标题风格
+    private String mMonthTitleTypeface;//月份标题风格
     protected Paint flagTextPaint;//标记字画笔
     protected Paint flagPreBgPaint;//已过标记背景画笔
     protected Paint flagNormalBgPaint;//标记背景画笔
@@ -132,17 +132,17 @@ class SimpleMonthView extends View {
         mCalendar = Calendar.getInstance();
         today = new Time(Time.getCurrentTimezone());
         today.setToNow();
-//        mMonthTitleTypeface = resources.getString(R.string.sans_serif);
-        mMonthTitleColor = typedArray.getColor(R.styleable.DayPickerView_monthTitleColor, resources.getColor(R.color.normal_day));
-        mMonthLineColor = typedArray.getColor(R.styleable.DayPickerView_monthLineColor, resources.getColor(R.color.normal_day));
-        mNormalDayColor = typedArray.getColor(R.styleable.DayPickerView_normalDayTextColor_pickview, resources.getColor(R.color.normal_day));
-        mPreviousDayColor = typedArray.getColor(R.styleable.DayPickerView_previousDayTextColor_pickview, resources.getColor(R.color.normal_day));
-        mSelectedBgColor = typedArray.getColor(R.styleable.DayPickerView_selectedBgColor_pickview, resources.getColor(R.color.selected_day_background));
-        mSelectedTextColor = typedArray.getColor(R.styleable.DayPickerView_selectedTextColor_pickview, resources.getColor(R.color.white));
-        todayTextColor = typedArray.getColor(R.styleable.DayPickerView_todayTextColor_pickview,resources.getColor(R.color.default_blue));
-        flagTextColor= typedArray.getColor(R.styleable.DayPickerView_flagTextColor_pickview,Color.WHITE);
-        flagPreBgColor=typedArray.getColor(R.styleable.DayPickerView_flagPreBgColor_pickview,resources.getColor(R.color.white));
-        flagNormalBgColor=typedArray.getColor(R.styleable.DayPickerView_flagNormalBgColor_pickview,resources.getColor(R.color.default_orange));
+        mMonthTitleTypeface = resources.getString(R.string.sans_serif);
+        mMonthTitleColor = typedArray.getColor(R.styleable.DayPickerView_monthTitleColor, ContextCompat.getColor(context,R.color.normal_day));
+        mMonthLineColor = typedArray.getColor(R.styleable.DayPickerView_monthLineColor, ContextCompat.getColor(context,R.color.normal_day));
+        mNormalDayColor = typedArray.getColor(R.styleable.DayPickerView_normalDayTextColor_pickview, ContextCompat.getColor(context,R.color.normal_day));
+        mPreviousDayColor = typedArray.getColor(R.styleable.DayPickerView_previousDayTextColor_pickview, ContextCompat.getColor(context,R.color.normal_day));
+        mSelectedBgColor = typedArray.getColor(R.styleable.DayPickerView_selectedBgColor_pickview, ContextCompat.getColor(context,R.color.selected_day_background));
+        mSelectedTextColor = typedArray.getColor(R.styleable.DayPickerView_selectedTextColor_pickview, ContextCompat.getColor(context,R.color.white));
+        todayTextColor = typedArray.getColor(R.styleable.DayPickerView_todayTextColor_pickview,ContextCompat.getColor(context,R.color.default_blue));
+        flagTextColor= typedArray.getColor(R.styleable.DayPickerView_flagTextColor_pickview,ContextCompat.getColor(context,R.color.white));
+        flagPreBgColor=typedArray.getColor(R.styleable.DayPickerView_flagPreBgColor_pickview,ContextCompat.getColor(context,R.color.white));
+        flagNormalBgColor=typedArray.getColor(R.styleable.DayPickerView_flagNormalBgColor_pickview,ContextCompat.getColor(context,R.color.default_orange));
         mDrawRect = typedArray.getBoolean(R.styleable.DayPickerView_isRoundRect_pickview, false);
         int preMonthNum = typedArray.getInteger(R.styleable.DayPickerView_preMonthNum_pickview,2);
         DateUtil.setPreMonthNum(preMonthNum);
@@ -333,7 +333,7 @@ class SimpleMonthView extends View {
         mMonthTitlePaint = new Paint();
         mMonthTitlePaint.setAntiAlias(true);
         mMonthTitlePaint.setTextSize(MONTH_TITLE_TEXT_SIZE);
-//        mMonthTitlePaint.setTypeface(Typeface.create(mMonthTitleTypeface, Typeface.BOLD));
+        mMonthTitlePaint.setTypeface(Typeface.create(mMonthTitleTypeface, Typeface.BOLD));
         mMonthTitlePaint.setColor(mMonthTitleColor);
         mMonthTitlePaint.setTextAlign(Align.CENTER);
         mMonthTitlePaint.setStyle(Style.FILL);
