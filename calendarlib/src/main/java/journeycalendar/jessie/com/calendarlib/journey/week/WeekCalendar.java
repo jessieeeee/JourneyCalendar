@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.StateListDrawable;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -71,28 +72,42 @@ public class WeekCalendar extends LinearLayout {
     private void init(AttributeSet attrs) {
         if (attrs != null) {
             typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.WeekCalendar);
-            int selectedDateColor = typedArray.getColor(R.styleable
-                    .WeekCalendar_selectedBgColor, ContextCompat.getColor(getContext(), R.color
+            int selectedBgColor = typedArray.getColor(R.styleable
+                    .WeekCalendar_selectedBgColor_weekview, ContextCompat.getColor(getContext(), R.color
                     .colorAccent));
-            int todayDateColor = typedArray.getColor(R.styleable
-                    .WeekCalendar_todaysDateBgColor, ContextCompat.getColor(getContext(), R.color
-                    .colorAccent));
-            int daysTextColor = typedArray.getColor(R.styleable
-                    .WeekCalendar_daysTextColor, Color.WHITE);
+            int dayTextColorPre = typedArray.getColor(R.styleable
+                    .WeekCalendar_previousTextColor_weekview, Color.WHITE);
+            int dayTextColorNormal = typedArray.getColor(R.styleable.WeekCalendar_normalTextColor_weekview,ContextCompat.getColor(getContext(),R.color.default_light_gray));
             float daysTextSize = typedArray.getDimension(R.styleable
-                    .WeekCalendar_daysTextSize, -1);
+                    .WeekCalendar_dayTextSize_weekview, -1);
             int todayDateTextColor = typedArray.getColor(R.styleable
-                    .WeekCalendar_todaysDateTextColor, ContextCompat.getColor(getContext(), android.R.color.white));
+                    .WeekCalendar_todayTextColor_weekview, ContextCompat.getColor(getContext(), R.color.default_blue));
+            int selectedTextColor = typedArray.getColor(R.styleable
+                    .WeekCalendar_selectedTextColor_weekview, ContextCompat.getColor(getContext(), R.color.white));
+            int flagPreBgColor=typedArray.getColor(R.styleable.WeekCalendar_flagPreBgColor_weekview,ContextCompat.getColor(getContext(), R.color.default_light_gray));
+            int flagNormalBgColor=typedArray.getColor(R.styleable.WeekCalendar_flagNormalBgColor_weekview,ContextCompat.getColor(getContext(), R.color.default_orange));
+            int flagTextColor=typedArray.getColor(R.styleable.WeekCalendar_flagTextColor_weekview,ContextCompat.getColor(getContext(), R.color.white));
+            String flagTextStr=typedArray.getString(R.styleable.WeekCalendar_flagTextStr_weekview);
+            if(TextUtils.isEmpty(flagTextStr)){
+                flagTextStr="行";
+            }
+            boolean drawRoundRect = typedArray.getBoolean(R.styleable.WeekCalendar_isRoundRect_weekview,false);
             setDayDecorator(new DefaultDayDecorator(getContext(),
-                    selectedDateColor,
-                    todayDateColor,
+                    selectedBgColor,
+                    selectedTextColor,
                     todayDateTextColor,
-                    daysTextColor,
-                    daysTextSize));
+                    dayTextColorPre,
+                    dayTextColorNormal,
+                    flagPreBgColor,
+                    flagNormalBgColor,
+                    flagTextColor,
+                    flagTextStr,
+                    daysTextSize,
+                    drawRoundRect));
         }
         setOrientation(VERTICAL);
 
-        if (!typedArray.getBoolean(R.styleable.WeekCalendar_hideNames, false)) {
+        if (!typedArray.getBoolean(R.styleable.WeekCalendar_hideWeekNum, false)) {
             daysName = getDaysNames();
             daysName.setGravity(Gravity.CENTER);
             addView(daysName);

@@ -117,15 +117,18 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            app:dayNameLength="singleLetter"
-            app:daysTextColor="@color/default_black"
-            app:daysTextSize="14sp"
-            app:numOfPages="150"
-            app:selectedBgColor="@color/default_blue"
-            app:todaysDateBgColor="@color/default_blue"
-            app:todaysDateTextColor="@color/default_blue"
+            app:previousTextColor_weekview="@color/default_light_gray"
+            app:normalTextColor_weekview="@color/default_black"
+            app:dayTextSize_weekview="14sp"
+            app:flagTextStr_weekview="@string/flag"
+            app:selectedTextColor_weekview="@color/white"
+            app:selectedBgColor_weekview="@color/default_blue"
+            app:todayTextColor_weekview="@color/default_blue"
             app:weekTextColor="@color/default_gray"
-            app:weekTextSize="12sp">
+            app:weekTextSize="12sp"
+            app:isRoundRect_weekview="false"
+            app:preMonthNum_pickview="3"
+            app:nextMonthNum_pickview="6">
 
         </journeycalendar.jessie.com.calendarlib.journey.week.WeekCalendar>
 

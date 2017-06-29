@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -25,7 +28,6 @@ import journeycalendar.jessie.com.calendarlib.journey.all.SimpleMonthAdapter;
 import journeycalendar.jessie.com.calendarlib.journey.week.WeekCalendar;
 import journeycalendar.jessie.com.calendarlib.journey.week.listener.OnDateClickListener;
 import journeycalendar.jessie.com.calendarlib.journey.week.listener.OnWeekChangeListener;
-import journeycalendar.jessie.com.calendarlib.journey.week.tools.CalendarListPopwindowPreview;
 import journeycalendar.jessie.com.calendarlib.journey.week.tools.DensityUtil;
 import journeycalendar.jessie.com.calendarlib.journey.week.tools.OtherUtils;
 
@@ -170,49 +172,23 @@ public class MainActivity extends AppCompatActivity {
     //设置数据
     private void setData() {
         journeyDates = new ArrayList<>();
-        JourneyDate journeyDate1 = new JourneyDate();
-        journeyDate1.setDate("2017-02-21");
-        journeyDate1.getJourneyBeens().add(new JourneyBean(1, "星期二加班1", "所属活动1"));
-        journeyDate1.getJourneyBeens().add(new JourneyBean(2, "星期二加班2", "所属活动2"));
-        journeyDate1.getJourneyBeens().add(new JourneyBean(3, "星期二加班3", "所属活动3"));
 
-        JourneyDate journeyDate2 = new JourneyDate();
-        journeyDate2.setDate("2017-02-22");
-        journeyDate2.getJourneyBeens().add(new JourneyBean(1, "星期三加班1", "所属活动1"));
-        journeyDate2.getJourneyBeens().add(new JourneyBean(2, "星期三加班2", "所属活动2"));
-        journeyDate2.getJourneyBeens().add(new JourneyBean(3, "星期三加班3", "所属活动3"));
-
-        JourneyDate journeyDate3 = new JourneyDate();
-        journeyDate3.setDate("2017-02-23");
-        journeyDate3.getJourneyBeens().add(new JourneyBean(1, "星期四加班1", "所属活动1"));
-        journeyDate3.getJourneyBeens().add(new JourneyBean(2, "星期四加班2", "所属活动2"));
-        journeyDate3.getJourneyBeens().add(new JourneyBean(3, "星期四加班3", "所属活动3"));
+        for(int i=0;i<10;i++){
+            DateTime dateTime=new DateTime();
+            int days= (int) (Math.random()*30);
+            days=days*(days%2==0?1:-1);
+            dateTime=dateTime.plusDays(days);
+            DateTimeFormatter dateTimeFormat= DateTimeFormat.forPattern("yyyy-MM-dd");
+            String dateStr=dateTime.toString(dateTimeFormat);
+            JourneyDate journeyDate = new JourneyDate();
+            journeyDate.setDate(dateStr);
+            journeyDate.getJourneyBeens().add(new JourneyBean(1, "加班1", "所属活动1"));
+            journeyDate.getJourneyBeens().add(new JourneyBean(2, "加班2", "所属活动2"));
+            journeyDate.getJourneyBeens().add(new JourneyBean(3, "加班3", "所属活动3"));
+            journeyDates.add(journeyDate);
+        }
 
 
-
-        JourneyDate journeyDate4 = new JourneyDate();
-        journeyDate4.setDate("2017-03-21");
-        journeyDate4.getJourneyBeens().add(new JourneyBean(1, "三月加班1", "所属活动1"));
-        journeyDate4.getJourneyBeens().add(new JourneyBean(2, "三月加班2", "所属活动2"));
-        journeyDate4.getJourneyBeens().add(new JourneyBean(3, "三月加班3", "所属活动3"));
-
-        JourneyDate journeyDate5 = new JourneyDate();
-        journeyDate5.setDate("2017-04-22");
-        journeyDate5.getJourneyBeens().add(new JourneyBean(1, "四月加班1", "所属活动1"));
-        journeyDate5.getJourneyBeens().add(new JourneyBean(2, "四月加班2", "所属活动2"));
-        journeyDate5.getJourneyBeens().add(new JourneyBean(3, "四月加班3", "所属活动3"));
-
-        JourneyDate journeyDate6 = new JourneyDate();
-        journeyDate6.setDate("2017-05-23");
-        journeyDate6.getJourneyBeens().add(new JourneyBean(1, "五月加班1", "所属活动1"));
-        journeyDate6.getJourneyBeens().add(new JourneyBean(2, "五月加班2", "所属活动2"));
-        journeyDate6.getJourneyBeens().add(new JourneyBean(3, "五月加班3", "所属活动3"));
-        journeyDates.add(journeyDate1);
-        journeyDates.add(journeyDate2);
-        journeyDates.add(journeyDate3);
-        journeyDates.add(journeyDate4);
-        journeyDates.add(journeyDate5);
-        journeyDates.add(journeyDate6);
         List<String> dates = getFlags();
         weekCalendar.setFlagList(dates);
         preview.setFlagDates(dates);

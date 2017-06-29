@@ -1,70 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- 周日历-->
     <declare-styleable name="WeekCalendar">
-        <attr name="numOfPages" format="integer"/>
-        <attr name="daysTextSize" format="dimension"/>
-        <attr name="daysTextColor" format="color"/>
-        <attr name="daysBackgroundColor" format="color"/>
+        <!--日期文字大小-->
+        <attr name="dayTextSize_weekview" format="dimension"/>
+        <!--过去日期颜色-->
+        <attr name="previousTextColor_weekview" format="color"/>
+        <!--未来日期颜色-->
+        <attr name="normalTextColor_weekview" format="color" />
+        <!--星期文字大小-->
         <attr name="weekTextSize" format="dimension"/>
+        <!--星期文字颜色-->
         <attr name="weekTextColor" format="color"/>
-        <attr name="weekBackgroundColor" format="color"/>
-        <attr name="selectedBgColor" format="color"/>
-        <attr name="todaysDateBgColor" format="color"/>
-        <attr name="dayNameLength">
-            <enum name="singleLetter" value="0"/>
-            <enum name="threeLetters" value="1"/>
-        </attr>
-        <attr name="hideNames"  format="boolean"/>
-
-        <!-- danigarciaalva -->
-        <attr name="todaysDateTextColor" format="color"/>
+        <!--选择星期文字颜色-->
+        <attr name="selectedTextColor_weekview" format="color"/>
+        <!--选择背景颜色-->
+        <attr name="selectedBgColor_weekview" format="color"/>
+        <!--  是否隐藏星期-->
+        <attr name="hideWeekNum"  format="boolean"/>
+        <!--今日文字颜色-->
+        <attr name="todayTextColor_weekview" format="color"/>
+        <!--显示过去月数-->
+        <attr name="preMonthNum_weekview" format="integer"/>
+        <!--显示未来月数-->
+        <attr name="nextMonthNum_weekview" format="integer"/>
+        <!--今日与选择日是否为矩形-->
+        <attr name="isRoundRect_weekview" format="boolean"/>
+        <!--标记文本-->
+        <attr name="flagTextStr_weekview" format="string"/>
+        <!--标记文本颜色-->
+        <attr name="flagTextColor_weekview" format="color"/>
+        <!--标记文本已过背景颜色-->
+        <attr name="flagPreBgColor_weekview" format="color"/>
+        <!--标记文本未来背景颜色-->
+        <attr name="flagNormalBgColor_weekview" format="color"/>
     </declare-styleable>
 
-
+    <!--月日历-->
     <declare-styleable name="DayPickerView">
-        <attr name="colorCurrentDay" format="color"/>
-        <attr name="colorSelectedDayBackground" format="color"/>
-        <attr name="colorSelectedDayText" format="color"/>
-        <attr name="colorPreviousDay" format="color"/>
-        <attr name="colorNormalDay" format="color" />
-        <attr name="colorMonthName" format="color" />
-        <attr name="colorDayName" format="color" />
-        <attr name="textSizeDay" format="dimension"/>
+        <!--标记文本-->
+        <attr name="flagTextStr_pickview" format="string"/>
+        <!--今日文字颜色-->
+        <attr name="todayTextColor_pickview" format="color"/>
+        <!--选择日期背景颜色-->
+        <attr name="selectedBgColor_pickview" format="color"/>
+        <!--选择日期文字-->
+        <attr name="selectedTextColor_pickview" format="color"/>
+        <!--过去日期颜色-->
+        <attr name="previousDayTextColor_pickview" format="color"/>
+        <!--未来日期颜色-->
+        <attr name="normalDayTextColor_pickview" format="color" />
+        <!--月份标题颜色-->
+        <attr name="monthTitleColor" format="color" />
+        <!--月份标题线颜色-->
+        <attr name="monthLineColor" format="color" />
+        <!--日期文字大小-->
+        <attr name="dayTextSize_pickview" format="dimension"/>
+        <!--月份标题文字大小-->
         <attr name="textSizeMonth" format="dimension" />
-        <attr name="textSizeDayName" format="dimension" />
+        <!--月份标题线粗细-->
+        <attr name="textSizeMonthLine" format="dimension"/>
+        <!--月份标题高度-->
         <attr name="headerMonthHeight" format="dimension" />
-        <attr name="selectedDayRadius" format="dimension" />
+        <!--选择日背景大小-->
+        <attr name="selectedDayBgRadius" format="dimension" />
+        <!--日历高度-->
         <attr name="calendarHeight" format="dimension" />
-        <attr name="enablePreviousDay" format="boolean" />
-        <attr name="currentDaySelected" format="boolean" />
-        <attr name="drawRoundRect" format="boolean" />
-        <attr name="firstMonth" format="enum">
-            <enum name="january" value="0" />
-            <enum name="february" value="1" />
-            <enum name="march" value="2" />
-            <enum name="april" value="3" />
-            <enum name="may" value="4" />
-            <enum name="june" value="5" />
-            <enum name="july" value="6" />
-            <enum name="august" value="7" />
-            <enum name="september" value="8" />
-            <enum name="october" value="9" />
-            <enum name="november" value="10" />
-            <enum name="december" value="11" />
-        </attr>
-        <attr name="lastMonth" format="enum">
-            <enum name="january" value="0" />
-            <enum name="february" value="1" />
-            <enum name="march" value="2" />
-            <enum name="april" value="3" />
-            <enum name="may" value="4" />
-            <enum name="june" value="5" />
-            <enum name="july" value="6" />
-            <enum name="august" value="7" />
-            <enum name="september" value="8" />
-            <enum name="october" value="9" />
-            <enum name="november" value="10" />
-            <enum name="december" value="11" />
-        </attr>
+        <!--今日与选择日是否为矩形-->
+        <attr name="isRoundRect_pickview" format="boolean" />
+        <!--显示过去月数-->
+        <attr name="preMonthNum_pickview" format="integer"/>
+        <!--显示未来月数-->
+        <attr name="nextMonthNum_pickview" format="integer"/>
+
+        <!--标记文本颜色-->
+        <attr name="flagTextColor_pickview" format="color"/>
+        <!--标记文本已过背景颜色-->
+        <attr name="flagPreBgColor_pickview" format="color"/>
+        <!--标记文本未来背景颜色-->
+        <attr name="flagNormalBgColor_pickview" format="color"/>
     </declare-styleable>
 </resources>

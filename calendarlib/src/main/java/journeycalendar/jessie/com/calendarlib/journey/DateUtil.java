@@ -10,11 +10,22 @@ import java.util.Date;
 /**
  * @author 编写人:JessieK
  * @date 创建时间:2017/2/23
- * @description 描述:
+ * @description 描述:日期工具类
  */
 
 
 public class DateUtil {
+    private static int preMonthNum=3;//前三个月
+    private static int nextMonthNum=6;//后六个月
+
+    public static void setPreMonthNum(int pre) {
+        preMonthNum = pre;
+    }
+
+    public static void setNextMonthNum(int next) {
+        nextMonthNum = next;
+    }
+
     //计算当前页数
     public static int countCurPage(){
         //初始化开始时间
@@ -67,34 +78,34 @@ public class DateUtil {
         return (offsetDay+2)/7 ;
     }
 
-    //获得开始月
+    //获得开始月 前三个月
     public static int getFirstMonth(){
         Calendar c= Calendar.getInstance();
-        int firstMonth= (c.get(Calendar.MONTH)-3<0)?12+c.get(Calendar.MONTH)-3:c.get(Calendar.MONTH)-3;
+        int firstMonth= (c.get(Calendar.MONTH)-preMonthNum<0)?12+c.get(Calendar.MONTH)-preMonthNum:c.get(Calendar.MONTH)-preMonthNum;
         return firstMonth;
     }
 
-    //获得结束月
+    //获得结束月 后6个月
     public static int getLastMonth(){
         Calendar c= Calendar.getInstance();
-        int lastMonth= (c.get(Calendar.MONTH)+6>12)?c.get(Calendar.MONTH)-12:c.get(Calendar.MONTH)+6;
+        int lastMonth= (c.get(Calendar.MONTH)+nextMonthNum>12)?c.get(Calendar.MONTH)-12:c.get(Calendar.MONTH)+nextMonthNum;
         return lastMonth;
     }
 
-    //开始年
+    //开始年 前三个月
     public static int getStartYear(){
         Calendar c= Calendar.getInstance();
-        if(c.get(Calendar.MONTH)-3<0){
+        if(c.get(Calendar.MONTH)-preMonthNum<0){
             return c.get(Calendar.YEAR)-1;
         }else{
             return c.get(Calendar.YEAR);
         }
     }
 
-    //结束年
+    //结束年 后6个月
     public static int getEndYear(){
         Calendar c= Calendar.getInstance();
-        if(c.get(Calendar.MONTH)+6>12){
+        if(c.get(Calendar.MONTH)+nextMonthNum>12){
             return c.get(Calendar.YEAR)+1;
         }else{
             return c.get(Calendar.YEAR);

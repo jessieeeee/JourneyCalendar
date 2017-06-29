@@ -37,8 +37,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import journeycalendar.jessie.com.calendarlib.R;
-
 import static journeycalendar.jessie.com.calendarlib.journey.DateUtil.getFirstMonth;
 import static journeycalendar.jessie.com.calendarlib.journey.DateUtil.getLastMonth;
 import static journeycalendar.jessie.com.calendarlib.journey.DateUtil.getStartYear;
@@ -136,8 +134,7 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
     }
 
     protected void init() {
-        if (typedArray.getBoolean(R.styleable.DayPickerView_currentDaySelected, false))
-            onDayTapped(new CalendarDay(System.currentTimeMillis()));
+        onDayTapped(new CalendarDay(System.currentTimeMillis()));
     }
 
     public void onDayClick(SimpleMonthView simpleMonthView, CalendarDay calendarDay) {

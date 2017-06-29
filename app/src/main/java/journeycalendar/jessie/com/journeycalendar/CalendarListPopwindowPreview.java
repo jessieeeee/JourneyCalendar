@@ -1,4 +1,4 @@
-package journeycalendar.jessie.com.calendarlib.journey.week.tools;
+package journeycalendar.jessie.com.journeycalendar;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,7 +10,6 @@ import android.widget.PopupWindow;
 import java.util.Calendar;
 import java.util.List;
 
-import journeycalendar.jessie.com.calendarlib.R;
 import journeycalendar.jessie.com.calendarlib.journey.DateUtil;
 import journeycalendar.jessie.com.calendarlib.journey.all.DatePickerController;
 import journeycalendar.jessie.com.calendarlib.journey.all.DayPickerView;
