@@ -12,8 +12,8 @@ import java.util.List;
 
 import journeycalendar.jessie.com.calendarlib.journey.DateUtil;
 import journeycalendar.jessie.com.calendarlib.journey.all.CalendarDay;
-import journeycalendar.jessie.com.calendarlib.journey.all.DatePickerController;
-import journeycalendar.jessie.com.calendarlib.journey.all.DayPickerView;
+import journeycalendar.jessie.com.calendarlib.journey.all.MonthCalendarController;
+import journeycalendar.jessie.com.calendarlib.journey.all.MonthCalendarView;
 
 
 /**
@@ -26,7 +26,7 @@ public class CalendarListPopwindowPreview {
     private View vPop;
     private static Context context;
     private List<String> dates;
-    private DayPickerView dayPickerView;
+    private MonthCalendarView monthCalendarView;
     public void showPop(View floatView) {
         if (pop != null && !pop.isShowing()) {
             pop.showAsDropDown(floatView);
@@ -41,24 +41,24 @@ public class CalendarListPopwindowPreview {
     }
 
     public void setSelect(CalendarDay calendarDay){
-        dayPickerView.setSelected(calendarDay);
+        monthCalendarView.setSelected(calendarDay);
     }
 
     private void moveToPosition(int n) {
         //先从RecyclerView的LayoutManager中获取第一项和最后一项的Position
-        int firstItem = dayPickerView.getLinearLayoutManager().findFirstVisibleItemPosition();
-        int lastItem = dayPickerView.getLinearLayoutManager().findLastVisibleItemPosition();
+        int firstItem = monthCalendarView.getLinearLayoutManager().findFirstVisibleItemPosition();
+        int lastItem = monthCalendarView.getLinearLayoutManager().findLastVisibleItemPosition();
         //然后区分情况
         if (n <= firstItem ){
             //当要置顶的项在当前显示的第一个项的前面时
-            dayPickerView.scrollToPosition(n);
+            monthCalendarView.scrollToPosition(n);
         }else if ( n <= lastItem ){
             //当要置顶的项已经在屏幕上显示时
-            int top = dayPickerView.getChildAt(n - firstItem).getTop();
-            dayPickerView.scrollBy(0, top);
+            int top = monthCalendarView.getChildAt(n - firstItem).getTop();
+            monthCalendarView.scrollBy(0, top);
         }else{
             //当要置顶的项在当前显示的最后一项的后面时
-            dayPickerView.scrollToPosition(n);
+            monthCalendarView.scrollToPosition(n);
         }
 
     }
@@ -67,7 +67,7 @@ public class CalendarListPopwindowPreview {
         int offset=0;
         Calendar calendar = Calendar.getInstance();
         int year=calendar.get(Calendar.YEAR);
-        if(year==dayPickerView.getStartYear()){
+        if(year== monthCalendarView.getStartYear()){
             offset=calendar.get(Calendar.MONTH)- DateUtil.getFirstMonth();
         }else{
             offset=(12-(DateUtil.getFirstMonth()-1))+calendar.get(Calendar.MONTH)-1;
@@ -84,9 +84,9 @@ public class CalendarListPopwindowPreview {
         pop.setFocusable(false);
         pop.setOutsideTouchable(false);
 
-        dayPickerView = (DayPickerView) vPop.findViewById(R.id.pop_pickerView);
+        monthCalendarView = (MonthCalendarView) vPop.findViewById(R.id.pop_pickerView);
 
-        dayPickerView.setController(new DatePickerController() {
+        monthCalendarView.setController(new MonthCalendarController() {
             @Override
             public int getMaxYear() {
                 return DateUtil.getEndYear();
@@ -107,7 +107,7 @@ public class CalendarListPopwindowPreview {
     }
 
     public void setFlagDates(List<String> dates){
-        dayPickerView.setFlagDates(dates);
+        monthCalendarView.setFlagDates(dates);
     }
 
 

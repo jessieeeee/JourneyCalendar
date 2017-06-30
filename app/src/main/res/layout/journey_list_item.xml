@@ -8,7 +8,7 @@
     android:paddingRight="12dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:orientation="vertical">
@@ -49,8 +49,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="5dp"
-            android:ellipsize="end"
-            android:maxEms="20"
             android:maxLines="1"
             android:text="表软件"
             android:textColor="@color/default_gray"

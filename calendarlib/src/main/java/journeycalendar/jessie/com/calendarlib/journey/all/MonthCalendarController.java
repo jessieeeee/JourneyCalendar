@@ -23,7 +23,7 @@
  ***********************************************************************************/
 package journeycalendar.jessie.com.calendarlib.journey.all;
 
-public interface DatePickerController {
+public interface MonthCalendarController {
 	int getMaxYear();
 
 	void onDayOfMonthSelected(int year, int month, int day);

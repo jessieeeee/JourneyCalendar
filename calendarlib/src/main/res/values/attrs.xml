@@ -3,63 +3,63 @@
     <!-- 周日历-->
     <declare-styleable name="WeekCalendar">
         <!--日期文字大小-->
-        <attr name="dayTextSize_weekview" format="dimension"/>
+        <attr name="dayTextSize_week" format="dimension"/>
         <!--过去日期颜色-->
-        <attr name="previousTextColor_weekview" format="color"/>
+        <attr name="previousTextColor_week" format="color"/>
         <!--未来日期颜色-->
-        <attr name="normalTextColor_weekview" format="color" />
+        <attr name="normalTextColor_week" format="color" />
         <!--星期文字大小-->
         <attr name="weekTextSize" format="dimension"/>
         <!--星期文字颜色-->
         <attr name="weekTextColor" format="color"/>
         <!--选择星期文字颜色-->
-        <attr name="selectedTextColor_weekview" format="color"/>
+        <attr name="selectedTextColor_week" format="color"/>
         <!--选择背景颜色-->
-        <attr name="selectedBgColor_weekview" format="color"/>
+        <attr name="selectedBgColor_week" format="color"/>
         <!--  是否隐藏星期-->
         <attr name="hideWeekNum"  format="boolean"/>
         <!--今日文字颜色-->
-        <attr name="todayTextColor_weekview" format="color"/>
+        <attr name="todayTextColor_week" format="color"/>
         <!--显示过去月数-->
-        <attr name="preMonthNum_weekview" format="integer"/>
+        <attr name="preMonthNum_week" format="integer"/>
         <!--显示未来月数-->
-        <attr name="nextMonthNum_weekview" format="integer"/>
+        <attr name="nextMonthNum_week" format="integer"/>
         <!--今日与选择日是否为矩形-->
-        <attr name="isRoundRect_weekview" format="boolean"/>
+        <attr name="isRoundRect_week" format="boolean"/>
         <!--标记文本-->
-        <attr name="flagTextStr_weekview" format="string"/>
+        <attr name="flagTextStr_week" format="string"/>
         <!--标记文本颜色-->
-        <attr name="flagTextColor_weekview" format="color"/>
+        <attr name="flagTextColor_week" format="color"/>
         <!--标记文本已过背景颜色-->
-        <attr name="flagPreBgColor_weekview" format="color"/>
+        <attr name="flagPreBgColor_week" format="color"/>
         <!--标记文本未来背景颜色-->
-        <attr name="flagNormalBgColor_weekview" format="color"/>
+        <attr name="flagNormalBgColor_week" format="color"/>
     </declare-styleable>
 
     <!--月日历-->
-    <declare-styleable name="DayPickerView">
+    <declare-styleable name="MonthCalendarView">
         <!--标记文本-->
-        <attr name="flagTextStr_pickview" format="string"/>
+        <attr name="flagTextStr_month" format="string"/>
         <!--今日文字颜色-->
-        <attr name="todayTextColor_pickview" format="color"/>
+        <attr name="todayTextColor_month" format="color"/>
         <!--选择日期背景颜色-->
-        <attr name="selectedBgColor_pickview" format="color"/>
+        <attr name="selectedBgColor_month" format="color"/>
         <!--选择日期文字-->
-        <attr name="selectedTextColor_pickview" format="color"/>
+        <attr name="selectedTextColor_month" format="color"/>
         <!--过去日期颜色-->
-        <attr name="previousDayTextColor_pickview" format="color"/>
+        <attr name="previousDayTextColor_month" format="color"/>
         <!--未来日期颜色-->
-        <attr name="normalDayTextColor_pickview" format="color" />
+        <attr name="normalDayTextColor_month" format="color" />
         <!--月份标题颜色-->
         <attr name="monthTitleColor" format="color" />
         <!--月份标题线颜色-->
         <attr name="monthLineColor" format="color" />
         <!--日期文字大小-->
-        <attr name="dayTextSize_pickview" format="dimension"/>
+        <attr name="dayTextSize_month" format="dimension"/>
         <!--月份标题文字大小-->
-        <attr name="textSizeMonth" format="dimension" />
+        <attr name="monthTitleTextSize" format="dimension" />
         <!--月份标题线粗细-->
-        <attr name="textSizeMonthLine" format="dimension"/>
+        <attr name="monthLineTextSize" format="dimension"/>
         <!--月份标题高度-->
         <attr name="headerMonthHeight" format="dimension" />
         <!--选择日背景大小-->
@@ -67,17 +67,17 @@
         <!--日历高度-->
         <attr name="calendarHeight" format="dimension" />
         <!--今日与选择日是否为矩形-->
-        <attr name="isRoundRect_pickview" format="boolean" />
+        <attr name="isRoundRect_month" format="boolean" />
         <!--显示过去月数-->
-        <attr name="preMonthNum_pickview" format="integer"/>
+        <attr name="preMonthNum_month" format="integer"/>
         <!--显示未来月数-->
-        <attr name="nextMonthNum_pickview" format="integer"/>
+        <attr name="nextMonthNum_month" format="integer"/>
 
         <!--标记文本颜色-->
-        <attr name="flagTextColor_pickview" format="color"/>
+        <attr name="flagTextColor_month" format="color"/>
         <!--标记文本已过背景颜色-->
-        <attr name="flagPreBgColor_pickview" format="color"/>
+        <attr name="flagPreBgColor_month" format="color"/>
         <!--标记文本未来背景颜色-->
-        <attr name="flagNormalBgColor_pickview" format="color"/>
+        <attr name="flagNormalBgColor_month" format="color"/>
     </declare-styleable>
 </resources>

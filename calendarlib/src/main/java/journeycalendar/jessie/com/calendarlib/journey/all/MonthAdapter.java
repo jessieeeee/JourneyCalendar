@@ -41,11 +41,11 @@ import static journeycalendar.jessie.com.calendarlib.journey.DateUtil.getFirstMo
 import static journeycalendar.jessie.com.calendarlib.journey.DateUtil.getLastMonth;
 import static journeycalendar.jessie.com.calendarlib.journey.DateUtil.getStartYear;
 
-public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.ViewHolder> implements SimpleMonthView.OnDayClickListener {
+public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.ViewHolder> implements MonthView.OnDayClickListener {
     protected static final int MONTHS_IN_YEAR = 12;
     private final TypedArray typedArray;
     private final Context mContext;
-    private final DatePickerController mController;
+    private final MonthCalendarController mController;
     private final Calendar calendar;
     private CalendarDay selectedDay;
     private final Integer firstMonth;
@@ -54,25 +54,25 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
     private int count= DateUtil.getPreMonthNum()+DateUtil.getNextMonthNum()+1;
 
 
-    public SimpleMonthAdapter(Context context, DatePickerController datePickerController, TypedArray typedArray) {
+    public MonthAdapter(Context context, MonthCalendarController monthCalendarController, TypedArray typedArray) {
         this.typedArray = typedArray;
         calendar = Calendar.getInstance();
         firstMonth = getFirstMonth();
         lastMonth = getLastMonth();
         mContext = context;
-        mController = datePickerController;
+        mController = monthCalendarController;
         init();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        final SimpleMonthView simpleMonthView = new SimpleMonthView(mContext, typedArray);
-        return new ViewHolder(simpleMonthView, this);
+        final MonthView monthView = new MonthView(mContext, typedArray);
+        return new ViewHolder(monthView, this);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        final SimpleMonthView v = viewHolder.simpleMonthView;
+        final MonthView v = viewHolder.monthView;
         final HashMap<String, Integer> drawingParams = new HashMap<String, Integer>();
         int month;
         int year;
@@ -85,13 +85,13 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
         int selectedFirstYear = (selectedDay==null?-1:selectedDay.year);
 
         v.reuse();
-        drawingParams.put(SimpleMonthView.VIEW_PARAMS_SELECTED_BEGIN_YEAR, selectedFirstYear);
-        drawingParams.put(SimpleMonthView.VIEW_PARAMS_SELECTED_BEGIN_MONTH, selectedFirstMonth);
-        drawingParams.put(SimpleMonthView.VIEW_PARAMS_SELECTED_BEGIN_DAY, selectedFirstDay);
+        drawingParams.put(MonthView.VIEW_PARAMS_SELECTED_BEGIN_YEAR, selectedFirstYear);
+        drawingParams.put(MonthView.VIEW_PARAMS_SELECTED_BEGIN_MONTH, selectedFirstMonth);
+        drawingParams.put(MonthView.VIEW_PARAMS_SELECTED_BEGIN_DAY, selectedFirstDay);
 
-        drawingParams.put(SimpleMonthView.VIEW_PARAMS_YEAR, year);
-        drawingParams.put(SimpleMonthView.VIEW_PARAMS_MONTH, month);
-        drawingParams.put(SimpleMonthView.VIEW_PARAMS_WEEK_START, calendar.getFirstDayOfWeek());
+        drawingParams.put(MonthView.VIEW_PARAMS_YEAR, year);
+        drawingParams.put(MonthView.VIEW_PARAMS_MONTH, month);
+        drawingParams.put(MonthView.VIEW_PARAMS_WEEK_START, calendar.getFirstDayOfWeek());
         v.setMonthParams(drawingParams);
         if(dates!=null){
             v.setFlagDates(dates);
@@ -110,14 +110,14 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        final SimpleMonthView simpleMonthView;
+        final MonthView monthView;
 
-        public ViewHolder(View itemView, SimpleMonthView.OnDayClickListener onDayClickListener) {
+        public ViewHolder(View itemView, MonthView.OnDayClickListener onDayClickListener) {
             super(itemView);
-            simpleMonthView = (SimpleMonthView) itemView;
-            simpleMonthView.setLayoutParams(new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-            simpleMonthView.setClickable(true);
-            simpleMonthView.setOnDayClickListener(onDayClickListener);
+            monthView = (MonthView) itemView;
+            monthView.setLayoutParams(new AbsListView.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+            monthView.setClickable(true);
+            monthView.setOnDayClickListener(onDayClickListener);
         }
     }
 
@@ -125,7 +125,7 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
         onDayTapped(new CalendarDay(System.currentTimeMillis()));
     }
 
-    public void onDayClick(SimpleMonthView simpleMonthView, CalendarDay calendarDay) {
+    public void onDayClick(MonthView monthView, CalendarDay calendarDay) {
         if (calendarDay != null) {
             onDayTapped(calendarDay);
         }

@@ -52,7 +52,7 @@ import journeycalendar.jessie.com.calendarlib.journey.DateUtil;
 import journeycalendar.jessie.com.calendarlib.journey.week.tools.DensityUtil;
 import journeycalendar.jessie.com.calendarlib.journey.week.tools.OtherUtils;
 
-class SimpleMonthView extends View {
+class MonthView extends View {
 
     public static final String VIEW_PARAMS_HEIGHT = "height";
     public static final String VIEW_PARAMS_MONTH = "month";
@@ -125,7 +125,7 @@ class SimpleMonthView extends View {
 
     private OnDayClickListener mOnDayClickListener;
 
-    public SimpleMonthView(Context context, TypedArray typedArray) {
+    public MonthView(Context context, TypedArray typedArray) {
         super(context);
 
         Resources resources = context.getResources();
@@ -133,35 +133,35 @@ class SimpleMonthView extends View {
         today = new Time(Time.getCurrentTimezone());
         today.setToNow();
         mMonthTitleTypeface = resources.getString(R.string.sans_serif);
-        mMonthTitleColor = typedArray.getColor(R.styleable.DayPickerView_monthTitleColor, ContextCompat.getColor(context,R.color.normal_day));
-        mMonthLineColor = typedArray.getColor(R.styleable.DayPickerView_monthLineColor, ContextCompat.getColor(context,R.color.normal_day));
-        mNormalDayColor = typedArray.getColor(R.styleable.DayPickerView_normalDayTextColor_pickview, ContextCompat.getColor(context,R.color.normal_day));
-        mPreviousDayColor = typedArray.getColor(R.styleable.DayPickerView_previousDayTextColor_pickview, ContextCompat.getColor(context,R.color.normal_day));
-        mSelectedBgColor = typedArray.getColor(R.styleable.DayPickerView_selectedBgColor_pickview, ContextCompat.getColor(context,R.color.selected_day_background));
-        mSelectedTextColor = typedArray.getColor(R.styleable.DayPickerView_selectedTextColor_pickview, ContextCompat.getColor(context,R.color.white));
-        todayTextColor = typedArray.getColor(R.styleable.DayPickerView_todayTextColor_pickview,ContextCompat.getColor(context,R.color.default_blue));
-        flagTextColor= typedArray.getColor(R.styleable.DayPickerView_flagTextColor_pickview,ContextCompat.getColor(context,R.color.white));
-        flagPreBgColor=typedArray.getColor(R.styleable.DayPickerView_flagPreBgColor_pickview,ContextCompat.getColor(context,R.color.white));
-        flagNormalBgColor=typedArray.getColor(R.styleable.DayPickerView_flagNormalBgColor_pickview,ContextCompat.getColor(context,R.color.default_orange));
-        mDrawRect = typedArray.getBoolean(R.styleable.DayPickerView_isRoundRect_pickview, false);
-        int preMonthNum = typedArray.getInteger(R.styleable.DayPickerView_preMonthNum_pickview,2);
+        mMonthTitleColor = typedArray.getColor(R.styleable.MonthCalendarView_monthTitleColor, ContextCompat.getColor(context,R.color.normal_day));
+        mMonthLineColor = typedArray.getColor(R.styleable.MonthCalendarView_monthLineColor, ContextCompat.getColor(context,R.color.normal_day));
+        mNormalDayColor = typedArray.getColor(R.styleable.MonthCalendarView_normalDayTextColor_month, ContextCompat.getColor(context,R.color.normal_day));
+        mPreviousDayColor = typedArray.getColor(R.styleable.MonthCalendarView_previousDayTextColor_month, ContextCompat.getColor(context,R.color.normal_day));
+        mSelectedBgColor = typedArray.getColor(R.styleable.MonthCalendarView_selectedBgColor_month, ContextCompat.getColor(context,R.color.selected_day_background));
+        mSelectedTextColor = typedArray.getColor(R.styleable.MonthCalendarView_selectedTextColor_month, ContextCompat.getColor(context,R.color.white));
+        todayTextColor = typedArray.getColor(R.styleable.MonthCalendarView_todayTextColor_month,ContextCompat.getColor(context,R.color.default_blue));
+        flagTextColor= typedArray.getColor(R.styleable.MonthCalendarView_flagTextColor_month,ContextCompat.getColor(context,R.color.white));
+        flagPreBgColor=typedArray.getColor(R.styleable.MonthCalendarView_flagPreBgColor_month,ContextCompat.getColor(context,R.color.white));
+        flagNormalBgColor=typedArray.getColor(R.styleable.MonthCalendarView_flagNormalBgColor_month,ContextCompat.getColor(context,R.color.default_orange));
+        mDrawRect = typedArray.getBoolean(R.styleable.MonthCalendarView_isRoundRect_month, false);
+        int preMonthNum = typedArray.getInteger(R.styleable.MonthCalendarView_preMonthNum_month,2);
         DateUtil.setPreMonthNum(preMonthNum);
-        int nextMonthNum = typedArray.getInteger(R.styleable.DayPickerView_nextMonthNum_pickview,2);
+        int nextMonthNum = typedArray.getInteger(R.styleable.MonthCalendarView_nextMonthNum_month,2);
         DateUtil.setNextMonthNum(nextMonthNum);
 
-        flag = typedArray.getString(R.styleable.DayPickerView_flagTextStr_pickview);
+        flag = typedArray.getString(R.styleable.MonthCalendarView_flagTextStr_month);
         if(TextUtils.isEmpty(flag)){
             flag="行";
         }
         mStringBuilder = new StringBuilder(50);
 
-        MINI_DAY_NUMBER_TEXT_SIZE = typedArray.getDimensionPixelSize(R.styleable.DayPickerView_dayTextSize_pickview, resources.getDimensionPixelSize(R.dimen.text_size_day));
-        MONTH_TITLE_TEXT_SIZE = typedArray.getDimensionPixelSize(R.styleable.DayPickerView_textSizeMonth, resources.getDimensionPixelSize(R.dimen.text_size_month));
-        MONTH_LINE_SIZE = typedArray.getDimensionPixelSize(R.styleable.DayPickerView_textSizeMonthLine, resources.getDimensionPixelSize(R.dimen.text_size_day_name));
-        MONTH_HEADER_SIZE = typedArray.getDimensionPixelOffset(R.styleable.DayPickerView_headerMonthHeight, resources.getDimensionPixelOffset(R.dimen.header_month_height));
-        DAY_SELECTED_CIRCLE_SIZE = typedArray.getDimensionPixelSize(R.styleable.DayPickerView_selectedDayBgRadius, resources.getDimensionPixelOffset(R.dimen.selected_day_radius));
+        MINI_DAY_NUMBER_TEXT_SIZE = typedArray.getDimensionPixelSize(R.styleable.MonthCalendarView_dayTextSize_month, resources.getDimensionPixelSize(R.dimen.text_size_day));
+        MONTH_TITLE_TEXT_SIZE = typedArray.getDimensionPixelSize(R.styleable.MonthCalendarView_monthTitleTextSize, resources.getDimensionPixelSize(R.dimen.text_size_month));
+        MONTH_LINE_SIZE = typedArray.getDimensionPixelSize(R.styleable.MonthCalendarView_monthLineTextSize, resources.getDimensionPixelSize(R.dimen.text_size_day_name));
+        MONTH_HEADER_SIZE = typedArray.getDimensionPixelOffset(R.styleable.MonthCalendarView_headerMonthHeight, resources.getDimensionPixelOffset(R.dimen.header_month_height));
+        DAY_SELECTED_CIRCLE_SIZE = typedArray.getDimensionPixelSize(R.styleable.MonthCalendarView_selectedDayBgRadius, resources.getDimensionPixelOffset(R.dimen.selected_day_radius));
 
-        mRowHeight = ((typedArray.getDimensionPixelSize(R.styleable.DayPickerView_calendarHeight, resources.getDimensionPixelOffset(R.dimen.calendar_height)) - MONTH_HEADER_SIZE) / 6);
+        mRowHeight = ((typedArray.getDimensionPixelSize(R.styleable.MonthCalendarView_calendarHeight, resources.getDimensionPixelOffset(R.dimen.calendar_height)) - MONTH_HEADER_SIZE) / 6);
 
         initView();
 
@@ -473,7 +473,7 @@ class SimpleMonthView extends View {
     }
 
     public interface OnDayClickListener {
-        void onDayClick(SimpleMonthView simpleMonthView, CalendarDay calendarDay);
+        void onDayClick(MonthView monthView, CalendarDay calendarDay);
     }
 
     /**

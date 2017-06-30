@@ -181,9 +181,9 @@ public class MainActivity extends AppCompatActivity {
             String dateStr=dateTime.toString(dateTimeFormat);
             JourneyDate journeyDate = new JourneyDate();
             journeyDate.setDate(dateStr);
-            journeyDate.getJourneyBeens().add(new JourneyBean(1, "加班1", "所属活动1"));
-            journeyDate.getJourneyBeens().add(new JourneyBean(2, "加班2", "所属活动2"));
-            journeyDate.getJourneyBeens().add(new JourneyBean(3, "加班3", "所属活动3"));
+            journeyDate.getJourneyBeens().add(new JourneyBean(1, "加班1", "活动111111111111111"));
+            journeyDate.getJourneyBeens().add(new JourneyBean(2, "加班2", "活动222222222222222"));
+            journeyDate.getJourneyBeens().add(new JourneyBean(3, "加班3", "活动333333333333333"));
             journeyDates.add(journeyDate);
         }
 

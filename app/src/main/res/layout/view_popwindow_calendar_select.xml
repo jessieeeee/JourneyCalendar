@@ -43,29 +43,29 @@
             android:text="六" />
     </LinearLayout>
 
-    <journeycalendar.jessie.com.calendarlib.journey.all.DayPickerView
+    <journeycalendar.jessie.com.calendarlib.journey.all.MonthCalendarView
         android:id="@+id/pop_pickerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/default_bg"
-        app:normalDayTextColor_pickview="@color/default_black"
-        app:previousDayTextColor_pickview="@color/default_light_gray"
-        app:selectedBgColor_pickview="@color/default_blue"
-        app:selectedTextColor_pickview="@color/white"
-        app:todayTextColor_pickview="@color/default_blue"
-        app:isRoundRect_pickview="false"
+        app:normalDayTextColor_month="@color/default_black"
+        app:previousDayTextColor_month="@color/default_light_gray"
+        app:selectedBgColor_month="@color/default_blue"
+        app:selectedTextColor_month="@color/white"
+        app:todayTextColor_month="@color/default_blue"
+        app:isRoundRect_month="false"
         app:stackFromEnd="true"
-        app:dayTextSize_pickview="12sp"
-        app:flagNormalBgColor_pickview="@color/default_orange"
-        app:flagPreBgColor_pickview="@color/default_light_gray"
-        app:flagTextStr_pickview="@string/flag"
-        app:flagTextColor_pickview="@color/white"
-        app:preMonthNum_pickview="3"
-        app:nextMonthNum_pickview="6"
-        app:textSizeMonthLine="12sp"
-        app:textSizeMonth="10sp">
+        app:dayTextSize_month="12sp"
+        app:flagNormalBgColor_month="@color/default_orange"
+        app:flagPreBgColor_month="@color/default_light_gray"
+        app:flagTextStr_month="@string/flag"
+        app:flagTextColor_month="@color/white"
+        app:preMonthNum_month="3"
+        app:nextMonthNum_month="6"
+        app:monthLineTextSize="12sp"
+        app:monthTitleTextSize="10sp">
 
-    </journeycalendar.jessie.com.calendarlib.journey.all.DayPickerView>
+    </journeycalendar.jessie.com.calendarlib.journey.all.MonthCalendarView>
 
 
 </LinearLayout>

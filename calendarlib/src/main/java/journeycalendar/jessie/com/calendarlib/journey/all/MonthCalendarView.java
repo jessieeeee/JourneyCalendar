@@ -34,34 +34,34 @@ import java.util.List;
 import journeycalendar.jessie.com.calendarlib.R;
 import journeycalendar.jessie.com.calendarlib.journey.DateUtil;
 
-public class DayPickerView extends RecyclerView {
+public class MonthCalendarView extends RecyclerView {
     protected Context mContext;
-    protected SimpleMonthAdapter mAdapter;
-    private DatePickerController mController;
+    protected MonthAdapter mAdapter;
+    private MonthCalendarController mController;
     protected int mCurrentScrollState = 0;
     protected long mPreviousScrollPosition;
     protected int mPreviousScrollState = 0;
     private TypedArray typedArray;
     private OnScrollListener onScrollListener;
     private LinearLayoutManager linearLayoutManager;
-    public DayPickerView(Context context) {
+    public MonthCalendarView(Context context) {
         this(context, null);
     }
 
-    public DayPickerView(Context context, AttributeSet attrs) {
+    public MonthCalendarView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public DayPickerView(Context context, AttributeSet attrs, int defStyle) {
+    public MonthCalendarView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         if (!isInEditMode()) {
-            typedArray = context.obtainStyledAttributes(attrs, R.styleable.DayPickerView);
+            typedArray = context.obtainStyledAttributes(attrs, R.styleable.MonthCalendarView);
             setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
             init(context);
         }
     }
 
-    public void setController(DatePickerController mController) {
+    public void setController(MonthCalendarController mController) {
         this.mController = mController;
         setUpAdapter();
         setAdapter(mAdapter);
@@ -86,7 +86,7 @@ public class DayPickerView extends RecyclerView {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                final SimpleMonthView child = (SimpleMonthView) recyclerView.getChildAt(0);
+                final MonthView child = (MonthView) recyclerView.getChildAt(0);
                 if (child == null) {
                     return;
                 }
@@ -108,7 +108,7 @@ public class DayPickerView extends RecyclerView {
 
     protected void setUpAdapter() {
         if (mAdapter == null) {
-            mAdapter = new SimpleMonthAdapter(getContext(), mController, typedArray);
+            mAdapter = new MonthAdapter(getContext(), mController, typedArray);
         }
         mAdapter.notifyDataSetChanged();
     }
