@@ -1,5 +1,5 @@
 # JourneyCalendar
-- ![image](https://github.com/jessieeeee/JourneyCalendar/blob/master/sample.gif)
+- ![image](http://oqujmbgen.bkt.clouddn.com/%E5%91%A8%E6%97%A5%E5%8E%86%E4%B8%8E%E6%9C%88%E6%97%A5%E5%8E%86%E7%9A%84%E8%81%94%E5%8A%A8%E5%AE%9E%E7%8E%B0.gif)
 ## support 
 ### week and month calendar
 ## Using library in your application
