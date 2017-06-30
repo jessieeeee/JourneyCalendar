@@ -23,7 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-import journeycalendar.jessie.com.calendarlib.journey.all.SimpleMonthAdapter;
+import journeycalendar.jessie.com.calendarlib.journey.all.CalendarDay;
 import journeycalendar.jessie.com.calendarlib.journey.week.WeekCalendar;
 import journeycalendar.jessie.com.calendarlib.journey.week.listener.OnDateClickListener;
 import journeycalendar.jessie.com.calendarlib.journey.week.listener.OnWeekChangeListener;
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 preview.goMonth();
                 Calendar click=clickDateTime.toCalendar(new Locale("zh", "ZH"));
-                preview.setSelect(new SimpleMonthAdapter.CalendarDay(click.get(Calendar.YEAR),click.get(Calendar.MONTH),click.get(Calendar.DAY_OF_MONTH)));
+                preview.setSelect(new CalendarDay(click.get(Calendar.YEAR),click.get(Calendar.MONTH),click.get(Calendar.DAY_OF_MONTH)));
                 preview.showPop(rl_bar);
             }
         });

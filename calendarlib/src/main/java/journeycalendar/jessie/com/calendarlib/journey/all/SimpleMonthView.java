@@ -205,7 +205,7 @@ class SimpleMonthView extends View {
         return DateUtils.formatDateRange(getContext(), millis, millis, flags);
     }
 
-    private void onDayClick(SimpleMonthAdapter.CalendarDay calendarDay) {
+    private void onDayClick(CalendarDay calendarDay) {
         if (mOnDayClickListener != null) {
             mOnDayClickListener.onDayClick(this, calendarDay);
         }
@@ -314,7 +314,7 @@ class SimpleMonthView extends View {
 
     }
 
-    public SimpleMonthAdapter.CalendarDay getDayFromLocation(float x, float y) {
+    public CalendarDay getDayFromLocation(float x, float y) {
         int padding = mPadding;
         if ((x < padding) || (x > mWidth - mPadding)) {
             return null;
@@ -326,7 +326,7 @@ class SimpleMonthView extends View {
         if (mMonth > 11 || mMonth < 0 || CalendarUtils.getDaysInMonth(mMonth, mYear) < day || day < 1)
             return null;
 
-        return new SimpleMonthAdapter.CalendarDay(mYear, mMonth, day);
+        return new CalendarDay(mYear, mMonth, day);
     }
 
     protected void initView() {
@@ -393,7 +393,7 @@ class SimpleMonthView extends View {
 
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            SimpleMonthAdapter.CalendarDay calendarDay = getDayFromLocation(event.getX(), event.getY());
+            CalendarDay calendarDay = getDayFromLocation(event.getX(), event.getY());
             if (calendarDay != null) {
                 onDayClick(calendarDay);
             }
@@ -473,7 +473,7 @@ class SimpleMonthView extends View {
     }
 
     public interface OnDayClickListener {
-        void onDayClick(SimpleMonthView simpleMonthView, SimpleMonthAdapter.CalendarDay calendarDay);
+        void onDayClick(SimpleMonthView simpleMonthView, CalendarDay calendarDay);
     }
 
     /**

@@ -31,9 +31,7 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AbsListView;
 
-import java.io.Serializable;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -105,23 +103,11 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
         return position;
     }
 
-    public void setItemCount(int count){
-        this.count=count;
-    }
-
     @Override
     public int getItemCount() {
-        int itemCount=count;
-//        int itemCount = (((mController.getMaxYear() - calendar.get(Calendar.YEAR)) + 1) * MONTHS_IN_YEAR);
-//
-//        if (firstMonth != -1)
-//            itemCount -= firstMonth;
-//
-//        if (lastMonth != -1)
-//            itemCount -= (MONTHS_IN_YEAR - lastMonth) - 1;
-
-        return itemCount;
+        return count;
     }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final SimpleMonthView simpleMonthView;
@@ -160,81 +146,6 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
     public void setSelectedDay(CalendarDay calendarDay) {
         this.selectedDay=calendarDay;
         notifyDataSetChanged();
-    }
-
-    public static class CalendarDay implements Serializable {
-        private static final long serialVersionUID = -5456695978688356202L;
-        private Calendar calendar;
-
-        int day;
-        int month;
-        int year;
-
-        public CalendarDay() {
-            setTime(System.currentTimeMillis());
-        }
-
-        public CalendarDay(int year, int month, int day) {
-            setDay(year, month, day);
-        }
-
-        public CalendarDay(long timeInMillis) {
-            setTime(timeInMillis);
-        }
-
-        public CalendarDay(Calendar calendar) {
-            year = calendar.get(Calendar.YEAR);
-            month = calendar.get(Calendar.MONTH);
-            day = calendar.get(Calendar.DAY_OF_MONTH);
-        }
-
-        private void setTime(long timeInMillis) {
-            if (calendar == null) {
-                calendar = Calendar.getInstance();
-            }
-            calendar.setTimeInMillis(timeInMillis);
-            month = this.calendar.get(Calendar.MONTH);
-            year = this.calendar.get(Calendar.YEAR);
-            day = this.calendar.get(Calendar.DAY_OF_MONTH);
-        }
-
-        public void set(CalendarDay calendarDay) {
-            year = calendarDay.year;
-            month = calendarDay.month;
-            day = calendarDay.day;
-        }
-
-        public void setDay(int year, int month, int day) {
-            this.year = year;
-            this.month = month;
-            this.day = day;
-        }
-
-        public Date getDate() {
-            if (calendar == null) {
-                calendar = Calendar.getInstance();
-            }
-            calendar.set(year, month, day);
-            return calendar.getTime();
-        }
-
-        @Override
-        public String toString() {
-            final StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("{ year: ");
-            stringBuilder.append(year);
-            stringBuilder.append(", month: ");
-            stringBuilder.append(month);
-            stringBuilder.append(", day: ");
-            stringBuilder.append(day);
-            stringBuilder.append(" }");
-
-            return stringBuilder.toString();
-        }
-    }
-
-    public CalendarDay getSelectedDays() {
-        return selectedDay;
     }
 
 }

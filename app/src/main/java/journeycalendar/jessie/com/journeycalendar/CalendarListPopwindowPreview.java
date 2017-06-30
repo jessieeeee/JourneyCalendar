@@ -11,9 +11,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import journeycalendar.jessie.com.calendarlib.journey.DateUtil;
+import journeycalendar.jessie.com.calendarlib.journey.all.CalendarDay;
 import journeycalendar.jessie.com.calendarlib.journey.all.DatePickerController;
 import journeycalendar.jessie.com.calendarlib.journey.all.DayPickerView;
-import journeycalendar.jessie.com.calendarlib.journey.all.SimpleMonthAdapter;
 
 
 /**
@@ -40,7 +40,7 @@ public class CalendarListPopwindowPreview {
         pop.dismiss();
     }
 
-    public void setSelect(SimpleMonthAdapter.CalendarDay calendarDay){
+    public void setSelect(CalendarDay calendarDay){
         dayPickerView.setSelected(calendarDay);
     }
 

@@ -101,7 +101,7 @@ public class DayPickerView extends RecyclerView {
         mAdapter.setFlagDates(dates);
     }
 
-    public void setSelected(SimpleMonthAdapter.CalendarDay calendarDay){
+    public void setSelected(CalendarDay calendarDay){
         mAdapter.setSelectedDay(calendarDay);
         mAdapter.notifyDataSetChanged();
     }
