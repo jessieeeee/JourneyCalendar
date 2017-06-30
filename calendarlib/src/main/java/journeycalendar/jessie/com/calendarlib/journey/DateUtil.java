@@ -26,6 +26,14 @@ public class DateUtil {
         nextMonthNum = next;
     }
 
+    public static int getPreMonthNum() {
+        return preMonthNum;
+    }
+
+    public static int getNextMonthNum() {
+        return nextMonthNum;
+    }
+
     //计算当前页数
     public static int countCurPage(){
         //初始化开始时间

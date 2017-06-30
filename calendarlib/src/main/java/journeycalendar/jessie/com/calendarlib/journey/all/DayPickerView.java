@@ -119,15 +119,4 @@ public class DayPickerView extends RecyclerView {
         setFadingEdgeLength(0);
     }
 
-    public SimpleMonthAdapter.CalendarDay getSelectedDay() {
-        return mAdapter.getSelectedDays();
-    }
-
-    protected DatePickerController getController() {
-        return mController;
-    }
-
-    protected TypedArray getTypedArray() {
-        return typedArray;
-    }
 }

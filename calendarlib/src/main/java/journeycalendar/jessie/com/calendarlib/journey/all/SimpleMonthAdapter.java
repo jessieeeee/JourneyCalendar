@@ -37,6 +37,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import journeycalendar.jessie.com.calendarlib.journey.DateUtil;
+
 import static journeycalendar.jessie.com.calendarlib.journey.DateUtil.getFirstMonth;
 import static journeycalendar.jessie.com.calendarlib.journey.DateUtil.getLastMonth;
 import static journeycalendar.jessie.com.calendarlib.journey.DateUtil.getStartYear;
@@ -51,7 +53,7 @@ public class SimpleMonthAdapter extends RecyclerView.Adapter<SimpleMonthAdapter.
     private final Integer firstMonth;
     private final Integer lastMonth;
     private List<String> dates;
-    private int count=10;
+    private int count= DateUtil.getPreMonthNum()+DateUtil.getNextMonthNum()+1;
 
 
     public SimpleMonthAdapter(Context context, DatePickerController datePickerController, TypedArray typedArray) {

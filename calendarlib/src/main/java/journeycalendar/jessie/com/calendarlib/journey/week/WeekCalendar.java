@@ -118,11 +118,6 @@ public class WeekCalendar extends LinearLayout {
         addView(weekPager,lpWeek);
     }
 
-    /***
-     * Do not use this method
-     * this is for receiving date,
-     * use "setOndateClick" instead.
-     */
     @Subscribe
     public void onDateClick(Event.OnDateClickEvent event) {
         if (listener != null)
