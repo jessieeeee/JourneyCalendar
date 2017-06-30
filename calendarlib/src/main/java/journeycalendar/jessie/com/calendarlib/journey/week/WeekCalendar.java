@@ -201,32 +201,12 @@ public class WeekCalendar extends LinearLayout {
         return daysName;
     }
 
-    /**
-     * Renders the days again. If you depend on deferred data which need to update the calendar
-     * after it's resolved to decorate the days.
-     */
-    public void updateUi() {
-        BusProvider.getInstance().post(new Event.OnUpdateUi());
-    }
-
-    public void moveToPrevious() {
-        BusProvider.getInstance().post(new Event.UpdateSelectedDateEvent(-1));
-    }
-
-    public void moveToNext() {
-        BusProvider.getInstance().post(new Event.UpdateSelectedDateEvent(1));
-    }
-
     public void reset() {
         BusProvider.getInstance().post(new Event.ResetEvent());
     }
 
     public void setSelectedDate(DateTime selectedDate) {
         BusProvider.getInstance().post(new Event.SetSelectedDateEvent(selectedDate));
-    }
-
-    public void setStartDate(DateTime startDate) {
-        BusProvider.getInstance().post(new Event.SetStartDateEvent(startDate));
     }
 
     @Override

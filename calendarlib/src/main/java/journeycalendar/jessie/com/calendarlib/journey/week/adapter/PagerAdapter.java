@@ -88,24 +88,4 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
     }
 
-
-
-
-   /* public DateTime getDate() {
-        return date;
-    }
-
-    public int getCurrentPage() {
-        return currentPage;
-    }
-
-    public void setCurrentPage(int currentPage) {
-        this.currentPage = currentPage;
-    }
-
-    public void setDate(DateTime date) {
-        this.date = date;
-    }
-*/
-
 }
