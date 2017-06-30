@@ -20,9 +20,9 @@ dependencies {
 	}
 </pre>
 
-##How to Use
-1. weekCalendar
-### date click 
+## How to Use
+### weekCalendar
+- date click 
 ```java
 weekCalendar.setOnDateClickListener(new OnDateClickListener() {
             @Override
@@ -36,7 +36,7 @@ weekCalendar.setOnDateClickListener(new OnDateClickListener() {
         });
   
 ```
-### week change
+- week change
 ```java
       weekCalendar.setOnWeekChangeListener(new OnWeekChangeListener() {
             @Override
@@ -48,21 +48,21 @@ weekCalendar.setOnDateClickListener(new OnDateClickListener() {
         });
 ```
 
-### set today
+- set today
 ```java
 weekCalendar.reset();
 ```
-### set selected date
+- set selected date
 ```java
 weekCalendar.setSelectedDate(dateTime);
 ```
-### set bottom flag
+- set bottom flag
 ```java
  weekCalendar.setFlagList(dates);
 ```
 
-2. monthCalendar
-## use in popwindow
+### monthCalendar
+- use in popwindow
 ```java
 
    LayoutInflater inflater = LayoutInflater.from(context);
