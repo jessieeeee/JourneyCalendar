@@ -89,7 +89,7 @@ public class CalendarListPopwindowPreview {
         dayPickerView.setController(new DatePickerController() {
             @Override
             public int getMaxYear() {
-                return getCurMaxYear();
+                return DateUtil.getEndYear();
             }
 
             @Override
@@ -104,16 +104,6 @@ public class CalendarListPopwindowPreview {
             }
 
         });
-    }
-
-    //获得最大月
-    private int getCurMaxYear(){
-        Calendar calendar = Calendar.getInstance();
-        if(calendar.get(Calendar.MONTH)+6>12){
-            return calendar.get(Calendar.YEAR)+1;
-        }else{
-            return calendar.get(Calendar.YEAR);
-        }
     }
 
     public void setFlagDates(List<String> dates){

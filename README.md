@@ -23,7 +23,7 @@ dependencies {
 ##How to Use
 1. weekCalendar
 ### date click 
-<pre>
+```java
 weekCalendar.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(DateTime dateTime) {
@@ -35,9 +35,9 @@ weekCalendar.setOnDateClickListener(new OnDateClickListener() {
 
         });
   
-</pre>
+```
 ### week change
-<pre>
+```java
       weekCalendar.setOnWeekChangeListener(new OnWeekChangeListener() {
             @Override
             public void onWeekChange(DateTime firstDayOfTheWeek, boolean forward) {
@@ -46,58 +46,51 @@ weekCalendar.setOnDateClickListener(new OnDateClickListener() {
                         " Forward: " + forward, Toast.LENGTH_SHORT).show();
             }
         });
-</pre>
+```
 
 ### set today
-<pre>
+```java
 weekCalendar.reset();
-</pre>
+```
 ### set selected date
-<pre>
+```java
 weekCalendar.setSelectedDate(dateTime);
-</pre>
+```
 ### set bottom flag
-<pre>
+```java
  weekCalendar.setFlagList(dates);
-</pre>
+```
 
 2. monthCalendar
-### init popwindow with monthCalendar
-<pre>
-preview = new CalendarListPopwindowPreview(context);
-</pre>
+## use in popwindow
+```java
 
-### date click
-<pre>
- preview.setOnCalendarSelectListener(new CalendarListPopwindowPreview.CalendarSelectListener() {
-            @Override
-            public void onCalendarSelect(int year, int month, int day) {
-            
-            }
-        });
-</pre>
+   LayoutInflater inflater = LayoutInflater.from(context);
+          vPop = inflater.inflate(R.layout.view_popwindow_calendar_select, null);
+          pop = new PopupWindow(vPop, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+  //        pop.setBackgroundDrawable(new ColorDrawable(0));
+          pop.setFocusable(false);
+          pop.setOutsideTouchable(false);
+  
+          dayPickerView = (DayPickerView) vPop.findViewById(R.id.pop_pickerView);
+  
+          dayPickerView.setController(new DatePickerController() {
+              @Override
+              public int getMaxYear() {
+                  return DateUtil.getEndYear();
+              }
+  
+              @Override
+              public void onDayOfMonthSelected(int year, int month, int day) {
+                  Log.e("kosmos", "onDayOfMonthSelected:" + day + " / " + month + " / " + year);
+                  if (listener != null) {
+                      listener.onCalendarSelect(year, month, day);
+                  }
+                  if (pop != null && pop.isShowing()) {
+  //                    pop.dismiss();
+                  }
+              }
+  
+          });
 
-### show popwindow with monthCalendar
-<pre>
-preview.showPop(view);
-</pre>
-
-### dismiss popwindow with monthCalendar
-<pre>
-preview.dismissPop();
-</pre>
-
-### go current month 
-<pre>
-preview.goMonth();
-</pre>
-
-### set selected date
-<pre>
-preview.setSelect(calendarDay);
-</pre>
-
-### set bottom flag
-<pre>
- preview.setFlagDates(dates);
-</pre>
+```
