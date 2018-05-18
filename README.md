@@ -29,16 +29,18 @@ dependencies {
 ### Configuration tool
 - DateUtil
 ```java
-DateUtil.setCurState(CUSTOM); //custom range
-// if you set custom range, you should set these
-DateUtil.setPreMonthNum(3); //previous three months
-DateUtil.setNextMonthNum(6); //next six months
 DateUtil.setCurState(DYNAMIC); //Dynamic setting range
 // if you set dynamic range, you should set these
+DateUtil.setPreMonthNum(3); //previous three months
+DateUtil.setNextMonthNum(6); //next six months
+DateUtil.setCurState(CUSTOM); //custom range
+// if you set custom range, you should set these
 DateUtil.setStartYear(2019);
 DateUtil.setEndYear(2019);
 DateUtil.setStartMonth(1);
 DateUtil.setEndMonth(2);
+// you can set today
+DateUtil.setCurDay(2019,1,12);
 ```
 ### attrs list
 ```xml
