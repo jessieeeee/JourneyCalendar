@@ -23,6 +23,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import journeycalendar.jessie.com.calendarlib.journey.DateUtil;
 import journeycalendar.jessie.com.calendarlib.journey.all.CalendarDay;
 import journeycalendar.jessie.com.calendarlib.journey.week.WeekCalendar;
 import journeycalendar.jessie.com.calendarlib.journey.week.listener.OnDateClickListener;
@@ -55,8 +56,21 @@ public class MainActivity extends AppCompatActivity {
         setDefault();
         setListener();
         clickDateTime=new DateTime();
-        journey_month.setText((new Date().getMonth() + 1 )+ "");
-        journey_data_title.setText(OtherUtils.formatDate(new Date()));
+        journey_month.setText((DateUtil.getCurWeekDayDate().getMonth() + 1 )+ "");
+        journey_data_title.setText(OtherUtils.formatDate(DateUtil.getCurWeekDayDate()));
+//        weekCalendar = WeekCalendar.newInstance(context)
+//                .setSelectedBgColor(ContextCompat.getColor(context, R.color.colorAccent))
+//                .setDayTextColorPre( Color.GRAY)
+//                .setDayTextColorNormal(ContextCompat.getColor(context, R.color.colorPrimary))
+//                .setDaysTextSize(12)
+//                .setTodayDateTextColor(Color.RED)
+//                .setSelectedTextColor(Color.WHITE)
+//                .setFlagPreBgColor(ContextCompat.getColor(context,R.color.default_black))
+//                .setFlagNormalBgColor(ContextCompat.getColor(context, R.color.default_blue))
+//                .setFlagTextColor(Color.WHITE)
+//                .setFlagTextStr("行")
+//                .setDrawRoundRect(true)
+//                .build();
         weekCalendar.setOnDateClickListener(new OnDateClickListener() {
             @Override
             public void onDateClick(DateTime dateTime) {
@@ -91,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         setData();
-        journeyListAdapter.setData(setCurJourneyList(new Date()));//设置当天的行程数据
+        journeyListAdapter.setData(setCurJourneyList(DateUtil.getCurWeekDayDate()));//设置当天的行程数据
     }
 
     private void setListener() {
@@ -101,9 +115,9 @@ public class MainActivity extends AppCompatActivity {
                 if (preview != null && preview.isShow()) {
                     preview.goMonth();
                 } else {
-                    journey_data_title.setText(OtherUtils.formatDate(new Date()));
+                    journey_data_title.setText(OtherUtils.formatDate(DateUtil.getCurWeekDayDate()));
                     weekCalendar.reset();
-                    journey_month.setText((new Date().getMonth() + 1) + "");
+                    journey_month.setText((DateUtil.getCurWeekDayDate().getMonth() + 1) + "");
                     weekCalendar.setSelectedDate(new DateTime());
                 }
             }

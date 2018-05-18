@@ -116,7 +116,6 @@ class MonthView extends View {
     protected int mRowHeight = DEFAULT_HEIGHT;
     protected int mWidth;
     protected int mYear;
-    final Time today;
 
     private final Calendar mCalendar;
 
@@ -130,8 +129,6 @@ class MonthView extends View {
 
         Resources resources = context.getResources();
         mCalendar = Calendar.getInstance();
-        today = new Time(Time.getCurrentTimezone());
-        today.setToNow();
         mMonthTitleTypeface = resources.getString(R.string.sans_serif);
         mMonthTitleColor = typedArray.getColor(R.styleable.MonthCalendarView_monthTitleColor, ContextCompat.getColor(context,R.color.normal_day));
         mMonthLineColor = typedArray.getColor(R.styleable.MonthCalendarView_monthLineColor, ContextCompat.getColor(context,R.color.normal_day));
@@ -211,12 +208,12 @@ class MonthView extends View {
         }
     }
 
-    private boolean sameDay(int monthDay, Time time) {
-        return (mYear == time.year) && (mMonth == time.month) && (monthDay == time.monthDay);
+    private boolean sameDay(int monthDay) {
+        return (mYear == DateUtil.getCurWeekDay().get(Calendar.YEAR)) && (mMonth == DateUtil.getCurWeekDay().get(Calendar.MONTH)) && (monthDay == DateUtil.getCurWeekDay().get(Calendar.DAY_OF_MONTH));
     }
 
-    private boolean prevDay(int monthDay, Time time) {
-        return ((mYear < time.year)) || (mYear == time.year && mMonth < time.month) || (mMonth == time.month && monthDay < time.monthDay);
+    private boolean prevDay(int monthDay) {
+        return ((mYear < DateUtil.getCurWeekDay().get(Calendar.YEAR))) || (mYear == DateUtil.getCurWeekDay().get(Calendar.YEAR) && mMonth < DateUtil.getCurWeekDay().get(Calendar.MONTH)) || (mMonth == DateUtil.getCurWeekDay().get(Calendar.MONTH) && monthDay < DateUtil.getCurWeekDay().get(Calendar.DAY_OF_MONTH));
     }
 
     //绘制日期
@@ -240,7 +237,7 @@ class MonthView extends View {
             mMonthTitlePaint.getTextBounds(flag,0,flag.length(),flagRect);
 
             //已经过了的日期
-            if (prevDay(day, today)) {
+            if (prevDay(day)) {
                 mMonthNumPaint.setColor(mPreviousDayColor);
                 if(isFlag(mYear,mMonth,day)){
                     //绘制方形背景
@@ -457,12 +454,12 @@ class MonthView extends View {
         mNumCells = CalendarUtils.getDaysInMonth(mMonth, mYear);
         for (int i = 0; i < mNumCells; i++) {
             final int day = i + 1;
-            if (sameDay(day, today)) {
+            if (sameDay(day)) {
                 mHasToday = true;
                 mToday = day;
             }
 
-            mIsPrev = prevDay(day, today);
+            mIsPrev = prevDay(day);
         }
 
         mNumRows = calculateNumRows();

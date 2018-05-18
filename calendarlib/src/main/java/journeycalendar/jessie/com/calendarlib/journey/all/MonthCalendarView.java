@@ -32,7 +32,6 @@ import android.util.AttributeSet;
 import java.util.List;
 
 import journeycalendar.jessie.com.calendarlib.R;
-import journeycalendar.jessie.com.calendarlib.journey.DateUtil;
 
 public class MonthCalendarView extends RecyclerView {
     protected Context mContext;
@@ -65,11 +64,6 @@ public class MonthCalendarView extends RecyclerView {
         this.mController = mController;
         setUpAdapter();
         setAdapter(mAdapter);
-    }
-
-
-    public int getStartYear(){
-        return DateUtil.getStartYear();
     }
 
     public LinearLayoutManager getLinearLayoutManager(){

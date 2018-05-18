@@ -7,7 +7,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,7 @@ import org.joda.time.DateTimeConstants;
 import java.util.ArrayList;
 
 import journeycalendar.jessie.com.calendarlib.R;
+import journeycalendar.jessie.com.calendarlib.journey.DateUtil;
 import journeycalendar.jessie.com.calendarlib.journey.week.eventbus.BusProvider;
 import journeycalendar.jessie.com.calendarlib.journey.week.eventbus.Event;
 
@@ -36,7 +36,7 @@ public class WeekFragment extends Fragment {
     public static String DATE_KEY = "date_key";
     private GridView gridView;
     private WeekAdapter weekAdapter;
-    public static DateTime selectedDateTime = new DateTime();
+    public static DateTime selectedDateTime = DateUtil.getCurWeekDayDateTime();
     private DateTime startDate;
     private DateTime endDate;
     private boolean isVisible;
@@ -169,7 +169,7 @@ public class WeekFragment extends Fragment {
             TextView dayTextView = (TextView) convertView.findViewById(R.id.daytext);
             dayTextView.setText(String.valueOf(dateTime.getDayOfMonth()));
             TextView textflag= (TextView) convertView.findViewById(R.id.textflag);
-            Log.v("jessie","传过去的"+dateTime.getDayOfMonth() );
+//            Log.v("jessie","传过去的"+dateTime.getDayOfMonth() );
             BusProvider.getInstance().post(new Event.OnDayDecorateEvent(convertView, dayTextView,
                     dateTime, firstDay, WeekFragment.selectedDateTime,textflag));
             return convertView;

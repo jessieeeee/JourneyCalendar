@@ -7,10 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
-import java.util.Calendar;
 import java.util.List;
 
-import journeycalendar.jessie.com.calendarlib.journey.DateUtil;
 import journeycalendar.jessie.com.calendarlib.journey.all.CalendarDay;
 import journeycalendar.jessie.com.calendarlib.journey.all.MonthCalendarController;
 import journeycalendar.jessie.com.calendarlib.journey.all.MonthCalendarView;
@@ -25,7 +23,6 @@ public class CalendarListPopwindowPreview {
     private static PopupWindow pop;
     private View vPop;
     private static Context context;
-    private List<String> dates;
     private MonthCalendarView monthCalendarView;
     public void showPop(View floatView) {
         if (pop != null && !pop.isShowing()) {
@@ -44,6 +41,10 @@ public class CalendarListPopwindowPreview {
         monthCalendarView.setSelected(calendarDay);
     }
 
+    /**
+     * 月日历列表滚动到指定位置
+     * @param n
+     */
     private void moveToPosition(int n) {
         //先从RecyclerView的LayoutManager中获取第一项和最后一项的Position
         int firstItem = monthCalendarView.getLinearLayoutManager().findFirstVisibleItemPosition();
@@ -64,19 +65,29 @@ public class CalendarListPopwindowPreview {
     }
 
     public void goMonth(){
-        int offset=0;
-        Calendar calendar = Calendar.getInstance();
-        int year=calendar.get(Calendar.YEAR);
-        if(year== monthCalendarView.getStartYear()){
-            offset=calendar.get(Calendar.MONTH)- DateUtil.getFirstMonth();
-        }else{
-            offset=(12-(DateUtil.getFirstMonth()-1))+calendar.get(Calendar.MONTH)-1;
-        }
-        moveToPosition(offset);
+        moveToPosition(0);
     }
+    /**
+     * 滚动到当前月
+     */
+//    public void goMonth(){
+//        int offset=0;
+//        Calendar calendar = Calendar.getInstance();
+//        int year=calendar.get(Calendar.YEAR);
+//        // 当前年等于月日历开始年
+//        if(year== monthCalendarView.getStartYear()){
+//            offset=calendar.get(Calendar.MONTH)- DateUtil.getFirstMonth();
+//        }else{
+//            offset=(12-(DateUtil.getFirstMonth()-1))+calendar.get(Calendar.MONTH)-1;
+//        }
+//        moveToPosition(offset);
+//    }
 
-    private void selectPhoto(Context context) {
-
+    /**
+     * 初始化popupwindow
+     * @param context
+     */
+    private void initPopup(Context context) {
         LayoutInflater inflater = LayoutInflater.from(context);
         vPop = inflater.inflate(R.layout.view_popwindow_calendar_select, null);
         pop = new PopupWindow(vPop, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -87,10 +98,6 @@ public class CalendarListPopwindowPreview {
         monthCalendarView = (MonthCalendarView) vPop.findViewById(R.id.pop_pickerView);
 
         monthCalendarView.setController(new MonthCalendarController() {
-            @Override
-            public int getMaxYear() {
-                return DateUtil.getEndYear();
-            }
 
             @Override
             public void onDayOfMonthSelected(int year, int month, int day) {
@@ -122,12 +129,8 @@ public class CalendarListPopwindowPreview {
         this.listener = listener;
     }
 
-
-    private CalendarListPopwindowPreview preview;
-
-
     public CalendarListPopwindowPreview(Context c) {
         context = c;
-        selectPhoto(context);
+        initPopup(context);
     }
 }

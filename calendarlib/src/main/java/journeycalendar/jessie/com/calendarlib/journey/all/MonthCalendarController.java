@@ -24,7 +24,6 @@
 package journeycalendar.jessie.com.calendarlib.journey.all;
 
 public interface MonthCalendarController {
-	int getMaxYear();
 
 	void onDayOfMonthSelected(int year, int month, int day);
 

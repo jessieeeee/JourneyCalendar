@@ -51,7 +51,7 @@ public class MonthAdapter extends RecyclerView.Adapter<MonthAdapter.ViewHolder> 
     private final Integer firstMonth;
     private final Integer lastMonth;
     private List<String> dates;
-    private int count= DateUtil.getPreMonthNum()+DateUtil.getNextMonthNum()+1;
+    private int count= DateUtil.showMonthNum();
 
 
     public MonthAdapter(Context context, MonthCalendarController monthCalendarController, TypedArray typedArray) {

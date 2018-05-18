@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
@@ -18,6 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import journeycalendar.jessie.com.calendarlib.R;
+import journeycalendar.jessie.com.calendarlib.journey.DateUtil;
 import journeycalendar.jessie.com.calendarlib.journey.week.tools.OtherUtils;
 
 
@@ -85,7 +85,7 @@ public class DefaultDayDecorator implements DayDecorator {
         // solidCircle.mutate().setAlpha(200);
         //holoCircle.mutate().setAlpha(200);
 
-        DateTime calendarStartDate = DateTime.now();
+        DateTime calendarStartDate = DateUtil.getCurWeekDayDateTime();
         if (selectedDateTime != null && !selectedDateTime.toLocalDate().equals(dateTime.toLocalDate())) { //当前时间未选中
             if (dateTime.toLocalDate().isBefore(calendarStartDate.toLocalDate())) {//在今天之前
                 dayTextView.setTextColor(textColorPre);
@@ -104,7 +104,7 @@ public class DefaultDayDecorator implements DayDecorator {
         float size = textSize;
         if (size == -1)
             size = dayTextView.getTextSize();
-        Log.v("jessie", dayTextView.getText().toString());
+//        Log.v("jessie", dayTextView.getText().toString());
         dayTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, size);
     }
 
@@ -112,7 +112,7 @@ public class DefaultDayDecorator implements DayDecorator {
     public void drawFlag(TextView flagText, DateTime dateTime, List<String> flagDates) {
         if (flagDates != null) {
             Iterator<String> it = flagDates.iterator();
-            DateTime calendarStartDate = DateTime.now();
+            DateTime calendarStartDate = DateUtil.getCurWeekDayDateTime();
             while (it.hasNext()) {
                 String date = it.next();
                 String curDate = OtherUtils.formatDate(dateTime.toDate(), "yyyy-MM-dd");

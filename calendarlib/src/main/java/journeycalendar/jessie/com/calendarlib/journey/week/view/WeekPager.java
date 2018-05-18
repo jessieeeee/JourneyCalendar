@@ -64,7 +64,7 @@ public class WeekPager extends ViewPager {
         }
         setId(idCheck());
         if (!isInEditMode()) {
-            initPager(new DateTime());
+            initPager(DateUtil.getCurWeekDayDateTime());
             BusProvider.getInstance().register(this);
         }
     }
@@ -97,7 +97,7 @@ public class WeekPager extends ViewPager {
         setOverScrollMode(OVER_SCROLL_NEVER);
         setCurrentItem(pos);
         if (WeekFragment.selectedDateTime == null)
-            WeekFragment.selectedDateTime = new DateTime();
+            WeekFragment.selectedDateTime = DateUtil.getCurWeekDayDateTime();
     }
 
     @Subscribe
@@ -113,9 +113,9 @@ public class WeekPager extends ViewPager {
 
     @Subscribe
     public void reset(Event.ResetEvent event) {
-        WeekFragment.selectedDateTime = DateTime.now();
+        WeekFragment.selectedDateTime = DateUtil.getCurWeekDayDateTime();
         //WeekFragment.CalendarStartDate = new DateTime();
-        initPager(DateTime.now());
+        initPager(DateUtil.getCurWeekDayDateTime());
     }
 
     @Subscribe

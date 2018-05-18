@@ -47,10 +47,22 @@ public class WeekCalendar extends LinearLayout {
     private DayDecorator dayDecorator;
     private OnWeekChangeListener onWeekChangeListener;
     private List<String> flagDates;//标记列表
+    private int selectedBgColor = ContextCompat.getColor(getContext(), R.color.colorAccent); //选择背景色
+    private int dayTextColorPre = Color.WHITE; //已过去文字颜色
+    private int dayTextColorNormal = ContextCompat.getColor(getContext(),R.color.default_light_gray); //未来文字颜色
+    private float daysTextSize = -1; //文字大小
+    private int todayDateTextColor = ContextCompat.getColor(getContext(), R.color.default_blue);//今日文字颜色
+    private int selectedTextColor = ContextCompat.getColor(getContext(), R.color.white);//选择文字颜色
+    private int flagPreBgColor = ContextCompat.getColor(getContext(), R.color.default_light_gray);//标记已过背景色
+    private int flagNormalBgColor = ContextCompat.getColor(getContext(), R.color.default_orange);//标记未来背景色
+    private int flagTextColor = ContextCompat.getColor(getContext(), R.color.white);//标记文字颜色
+    private String flagTextStr="行";//标记文字
+    private boolean drawRoundRect = false;//今日与选择日是否为矩形
     public void setFlagList(List<String> flagDates){
         this.flagDates=flagDates;
         BusProvider.getInstance().post(new Event.InvalidateEvent());
     }
+
 
     public WeekCalendar(Context context) {
         super(context);
@@ -69,29 +81,114 @@ public class WeekCalendar extends LinearLayout {
 
     }
 
+    /**
+     * 动态创建实例化
+     * @param context
+     * @return
+     */
+    public static WeekCalendar newInstance(Context context){
+        WeekCalendar weekCalendar=new WeekCalendar(context);
+        weekCalendar.init(null);
+        return weekCalendar;
+    }
+
+    /**
+     * 应用动态创建样式
+     */
+    public WeekCalendar build(){
+        setDayDecorator(new DefaultDayDecorator(getContext(),
+                selectedBgColor,
+                selectedTextColor,
+                todayDateTextColor,
+                dayTextColorPre,
+                dayTextColorNormal,
+                flagPreBgColor,
+                flagNormalBgColor,
+                flagTextColor,
+                flagTextStr,
+                daysTextSize,
+                drawRoundRect));
+        return this;
+    }
+
+    public WeekCalendar setSelectedBgColor(int selectedBgColor) {
+        this.selectedBgColor = selectedBgColor;
+        return this;
+    }
+
+    public WeekCalendar setDayTextColorPre(int dayTextColorPre) {
+        this.dayTextColorPre = dayTextColorPre;
+        return this;
+    }
+
+    public WeekCalendar setDayTextColorNormal(int dayTextColorNormal) {
+        this.dayTextColorNormal = dayTextColorNormal;
+        return this;
+    }
+
+    public WeekCalendar setDaysTextSize(float daysTextSize) {
+        this.daysTextSize = daysTextSize;
+        return this;
+    }
+
+    public WeekCalendar setTodayDateTextColor(int todayDateTextColor) {
+        this.todayDateTextColor = todayDateTextColor;
+        return this;
+    }
+
+    public WeekCalendar setSelectedTextColor(int selectedTextColor) {
+        this.selectedTextColor = selectedTextColor;
+        return this;
+    }
+
+    public WeekCalendar setFlagPreBgColor(int flagPreBgColor) {
+        this.flagPreBgColor = flagPreBgColor;
+        return this;
+    }
+
+    public WeekCalendar setFlagNormalBgColor(int flagNormalBgColor) {
+        this.flagNormalBgColor = flagNormalBgColor;
+        return this;
+    }
+
+    public WeekCalendar setFlagTextColor(int flagTextColor) {
+        this.flagTextColor = flagTextColor;
+        return this;
+    }
+
+    public WeekCalendar setFlagTextStr(String flagTextStr) {
+        this.flagTextStr = flagTextStr;
+        return this;
+    }
+
+    public WeekCalendar setDrawRoundRect(boolean drawRoundRect) {
+        this.drawRoundRect = drawRoundRect;
+        return this;
+    }
+
     private void init(AttributeSet attrs) {
         if (attrs != null) {
             typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.WeekCalendar);
-            int selectedBgColor = typedArray.getColor(R.styleable
+            selectedBgColor = typedArray.getColor(R.styleable
                     .WeekCalendar_selectedBgColor_week, ContextCompat.getColor(getContext(), R.color
                     .colorAccent));
-            int dayTextColorPre = typedArray.getColor(R.styleable
+            dayTextColorPre = typedArray.getColor(R.styleable
                     .WeekCalendar_previousTextColor_week, Color.WHITE);
-            int dayTextColorNormal = typedArray.getColor(R.styleable.WeekCalendar_normalTextColor_week,ContextCompat.getColor(getContext(),R.color.default_light_gray));
-            float daysTextSize = typedArray.getDimension(R.styleable
+            dayTextColorNormal = typedArray.getColor(R.styleable.WeekCalendar_normalTextColor_week,ContextCompat.getColor(getContext(),R.color.default_light_gray));
+            daysTextSize = typedArray.getDimension(R.styleable
                     .WeekCalendar_dayTextSize_week, -1);
-            int todayDateTextColor = typedArray.getColor(R.styleable
+            todayDateTextColor = typedArray.getColor(R.styleable
                     .WeekCalendar_todayTextColor_week, ContextCompat.getColor(getContext(), R.color.default_blue));
-            int selectedTextColor = typedArray.getColor(R.styleable
+            selectedTextColor = typedArray.getColor(R.styleable
                     .WeekCalendar_selectedTextColor_week, ContextCompat.getColor(getContext(), R.color.white));
-            int flagPreBgColor=typedArray.getColor(R.styleable.WeekCalendar_flagPreBgColor_week,ContextCompat.getColor(getContext(), R.color.default_light_gray));
-            int flagNormalBgColor=typedArray.getColor(R.styleable.WeekCalendar_flagNormalBgColor_week,ContextCompat.getColor(getContext(), R.color.default_orange));
-            int flagTextColor=typedArray.getColor(R.styleable.WeekCalendar_flagTextColor_week,ContextCompat.getColor(getContext(), R.color.white));
-            String flagTextStr=typedArray.getString(R.styleable.WeekCalendar_flagTextStr_week);
+            flagPreBgColor=typedArray.getColor(R.styleable.WeekCalendar_flagPreBgColor_week,ContextCompat.getColor(getContext(), R.color.default_light_gray));
+            flagNormalBgColor=typedArray.getColor(R.styleable.WeekCalendar_flagNormalBgColor_week,ContextCompat.getColor(getContext(), R.color.default_orange));
+            flagTextColor=typedArray.getColor(R.styleable.WeekCalendar_flagTextColor_week,ContextCompat.getColor(getContext(), R.color.white));
+            flagTextStr=typedArray.getString(R.styleable.WeekCalendar_flagTextStr_week);
             if(TextUtils.isEmpty(flagTextStr)){
                 flagTextStr="行";
             }
-            boolean drawRoundRect = typedArray.getBoolean(R.styleable.WeekCalendar_isRoundRect_week,false);
+            drawRoundRect = typedArray.getBoolean(R.styleable.WeekCalendar_isRoundRect_week,false);
             setDayDecorator(new DefaultDayDecorator(getContext(),
                     selectedBgColor,
                     selectedTextColor,
