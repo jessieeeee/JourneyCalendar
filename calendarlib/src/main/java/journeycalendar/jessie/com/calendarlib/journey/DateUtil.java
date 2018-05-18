@@ -35,6 +35,10 @@ public class DateUtil {
 
     static {
 //        setCurState(CUSTOM);
+//        setStartYear(2019);
+//        setEndYear(2020);
+//        setStartMonth(1);
+//        setEndMonth(1);
     }
     /**
      * 设置当前模式
@@ -43,7 +47,7 @@ public class DateUtil {
     public static void setCurState(int curState) {
         DateUtil.curState = curState;
         if (curState == CUSTOM) {
-            curDay.set(2019,0,12);
+           setCurDay(2019,1,12);
         }
     }
 
@@ -52,6 +56,11 @@ public class DateUtil {
      * @param startMonth
      */
     public static void setStartMonth(int startMonth) {
+        if (startMonth-1 < 0){
+            startMonth = 0;
+        } else {
+            startMonth = startMonth - 1;
+        }
         DateUtil.startMonth = startMonth;
     }
 
@@ -68,6 +77,11 @@ public class DateUtil {
      * @param endMonth
      */
     public static void setEndMonth(int endMonth) {
+        if (endMonth-1 < 0) {
+            endMonth = 0;
+        } else {
+            endMonth = endMonth - 1;
+        }
         DateUtil.endMonth = endMonth;
     }
 
@@ -76,6 +90,9 @@ public class DateUtil {
      * @param endYear
      */
     public static void setEndYear(int endYear) {
+        if (endYear - startYear < 0) {
+            endYear = startYear;
+        }
         DateUtil.endYear = endYear;
     }
 
@@ -88,8 +105,10 @@ public class DateUtil {
     public static void setCurDay(int year,int month,int day){
         if (month-1 < 0){
             month = 0;
+        } else {
+            month = month-1;
         }
-        curDay.set(year,month-1,day);
+        curDay.set(year,month,day);
     }
 
     /**
