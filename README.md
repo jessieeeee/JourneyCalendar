@@ -21,7 +21,7 @@ Add it in your root build.gradle at the end of repositories:
 ### Step 2. Add the dependency
 <pre>
 dependencies {
-       implementation 'com.github.jessieeeee:JourneyCalendar:v1.0.2'
+       implementation 'com.github.jessieeeee:JourneyCalendar:v1.0.3'
 	}
 </pre>
 
