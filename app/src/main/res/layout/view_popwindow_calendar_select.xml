@@ -60,8 +60,6 @@
         app:flagPreBgColor_month="@color/default_light_gray"
         app:flagTextStr_month="@string/flag"
         app:flagTextColor_month="@color/white"
-        app:preMonthNum_month="3"
-        app:nextMonthNum_month="6"
         app:monthLineTextSize="12sp"
         app:monthTitleTextSize="10sp">
 

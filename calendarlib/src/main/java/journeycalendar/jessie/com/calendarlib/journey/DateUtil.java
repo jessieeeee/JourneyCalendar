@@ -35,10 +35,15 @@ public class DateUtil {
 
     static {
 //        setCurState(CUSTOM);
-//        setStartYear(2019);
-//        setEndYear(2020);
-//        setStartMonth(1);
-//        setEndMonth(1);
+//        setStartYear(2016);
+//        setEndYear(2019);
+//        setStartMonth(12);
+//        setEndMonth(12);
+        setMonthRange(3,6);
+    }
+
+    public static int getCurState(){
+        return DateUtil.curState;
     }
     /**
      * 设置当前模式
@@ -112,21 +117,52 @@ public class DateUtil {
     }
 
     /**
-     * 设置前X个月
-     * @param pre
+     *
+     * @param pre 设置前X个月
+     * @param next 设置后Y个月
      */
-    public static void setPreMonthNum(int pre) {
+    public static void setMonthRange(int pre,int next){
+        if ( pre < 0 ) {
+            pre = 0;
+        }
+        if ( next < 0){
+            next = 0;
+        }
         preMonthNum = pre;
-    }
-
-    /**
-     * 设置后Y个月
-     * @param next
-     */
-    public static void setNextMonthNum(int next) {
         nextMonthNum = next;
-    }
+        Calendar c = getCurWeekDay();
+        int preOffsetYear = pre / 12;
+        startYear = c.get(Calendar.YEAR);
+        // 确定开始年
+        if (preOffsetYear > 0){
+            startYear =  startMonth - preOffsetYear;
+        }
+        // 确定结束年
+        int nextOffsetYear = next / 12;
+        endYear = c.get(Calendar.YEAR);
+        if (nextOffsetYear > 0){
+            endYear = endYear + nextOffsetYear;
+        }
+        // 确定开始月
+        int preOffsetMonth = pre % 12;
+        startMonth = c.get(Calendar.MONTH) - preOffsetMonth;
+        if (startMonth < 0) {
+            startMonth = 11 + startMonth + 1;
+            startYear -- ;
+        }
+        // 确定结束月
+        int endOffsetMonth = next % 12;
+        endMonth = c.get(Calendar.MONTH) + endOffsetMonth;
+        if (endMonth > 11){
+            endMonth = endMonth - 11 - 1;
+            endYear ++ ;
+        }
+        System.out.println(startYear);
+        System.out.println(startMonth);
+        System.out.println(endYear);
+        System.out.println(endMonth);
 
+    }
 
     /**
      * 需要展示的月份数
@@ -137,7 +173,18 @@ public class DateUtil {
         if (curState == DYNAMIC) {
             return preMonthNum + nextMonthNum + 1;
         } else { //如果当前是指定范围展示
-            return (endYear - startYear)*12 + (endMonth - startMonth + 1);
+            int showNum = 0;
+            // 同一年
+            if ( endYear == startYear){
+                showNum = endMonth - startMonth;
+            } else { //不同年
+                // 相差一年以上
+                if ( endYear - startYear - 1 > 0) {
+                    showNum = (endYear - startYear -1 )*12;
+                }
+                showNum =  showNum + (11 - startMonth + 1) + (endMonth+1) ;
+            }
+            return showNum;
         }
     }
 
@@ -194,11 +241,11 @@ public class DateUtil {
         end.set(endYear,endMonth,1);
         int endDayOfMonth=end.getActualMaximum(Calendar.DAY_OF_MONTH);
         end.set(endYear,endMonth,endDayOfMonth);
-        DateTime endDay=new DateTime(end);
-        if(endDay.get(DateTimeFieldType.dayOfWeek())!=DateTimeConstants.SUNDAY){//不是星期天
-            endDay=endDay.withDayOfWeek(DateTimeConstants.SATURDAY);//当前周六
+        DateTime endDay=new DateTime(end);//这个月的最后一天
+        if(endDay.get(DateTimeFieldType.dayOfWeek())!=DateTimeConstants.SUNDAY){//当前最后一天不是星期天
+            endDay=endDay.withDayOfWeek(DateTimeConstants.SATURDAY);//把最后一天设置为星期六
         }else{
-            endDay=endDay.withDayOfWeek(DateTimeConstants.SATURDAY).plusDays(7);//下个周六
+            endDay=endDay.withDayOfWeek(DateTimeConstants.SATURDAY).plusDays(7);//如果是，把最后一天设置为下个周六
         }
         return diffWeek(firstDay.toDate(),endDay.toDate());
     }
@@ -208,55 +255,24 @@ public class DateUtil {
         return (offsetDay+2)/7 ;
     }
 
-    //获得开始月 前三个月
+    //获得开始月
     public static int getFirstMonth(){
-        if (curState == DYNAMIC) {
-            Calendar c= Calendar.getInstance();
-            int firstMonth= (c.get(Calendar.MONTH)-preMonthNum<0)?12+c.get(Calendar.MONTH)-preMonthNum:c.get(Calendar.MONTH)-preMonthNum;
-            return firstMonth;
-        } else {
-            return startMonth;
-        }
+        return startMonth;
     }
 
     //获得结束月 后6个月
     public static int getLastMonth(){
-        if (curState == DYNAMIC) {
-            Calendar c= Calendar.getInstance();
-            int lastMonth= (c.get(Calendar.MONTH)+nextMonthNum>12)?c.get(Calendar.MONTH)-12:c.get(Calendar.MONTH)+nextMonthNum;
-            return lastMonth;
-        } else {
-            return endMonth;
-        }
-
+        return endMonth;
     }
 
     //开始年 前三个月
     public static int getStartYear(){
-       if (curState == DYNAMIC) {
-           Calendar c= Calendar.getInstance();
-           if(c.get(Calendar.MONTH)-preMonthNum<0){
-               return c.get(Calendar.YEAR)-1;
-           }else{
-               return c.get(Calendar.YEAR);
-           }
-       } else {
-           return startYear;
-       }
+        return startYear;
     }
 
 
     //结束年 后6个月
     public static int getEndYear(){
-        if (curState == DYNAMIC) {
-            Calendar c= Calendar.getInstance();
-            if(c.get(Calendar.MONTH)+nextMonthNum>12){
-                return c.get(Calendar.YEAR)+1;
-            }else{
-                return c.get(Calendar.YEAR);
-            }
-        } else{
-            return endYear;
-        }
+        return endYear;
     }
 }

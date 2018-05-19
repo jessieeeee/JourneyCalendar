@@ -4,9 +4,9 @@
 ### week and month calendar
 ### two modes
 1. Dynamic setting range
-Based on the current month,previous three months and next six months
+Based on the current month, for example, previous three months and next six months
 2. Custom range
-like this 2019-1 to 2019-2
+such as 2019-1 to 2019-2
 ## Using library in your application
 ### Step 1. Add the JitPack repository to your build file
 Add it in your root build.gradle at the end of repositories:
@@ -31,8 +31,7 @@ dependencies {
 ```java
 DateUtil.setCurState(DYNAMIC); //Dynamic setting range
 // if you set dynamic range, you should set these
-DateUtil.setPreMonthNum(3); //previous three months
-DateUtil.setNextMonthNum(6); //next six months
+ setMonthRange(3,6); //previous three months,next six months
 DateUtil.setCurState(CUSTOM); //custom range
 // if you set custom range, you should set these
 DateUtil.setStartYear(2019);
@@ -146,8 +145,7 @@ DateUtil.setCurDay(2019,1,12);
              app:weekTextColor="@color/default_gray"
              app:weekTextSize="12sp"
              app:isRoundRect_week="false"
-             app:preMonthNum_week="3"
-             app:nextMonthNum_week="6">
+            >
  
          </journeycalendar.jessie.com.calendarlib.journey.week.WeekCalendar>
 ```
@@ -226,8 +224,6 @@ weekCalendar.setSelectedDate(dateTime);
         app:flagPreBgColor_month="@color/default_light_gray"
         app:flagTextStr_month="@string/flag"
         app:flagTextColor_month="@color/white"
-        app:preMonthNum_month="3"
-        app:nextMonthNum_month="6"
         app:monthLineTextSize="12sp"
         app:monthTitleTextSize="10sp">
 
@@ -253,7 +249,6 @@ weekCalendar.setSelectedDate(dateTime);
   
               @Override
               public void onDayOfMonthSelected(int year, int month, int day) {
-                  Log.e("kosmos", "onDayOfMonthSelected:" + day + " / " + month + " / " + year);
                   if (listener != null) {
                       listener.onCalendarSelect(year, month, day);
                   }

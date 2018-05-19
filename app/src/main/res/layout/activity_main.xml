@@ -127,8 +127,7 @@
             app:weekTextColor="@color/default_gray"
             app:weekTextSize="12sp"
             app:isRoundRect_week="false"
-            app:preMonthNum_week="3"
-            app:nextMonthNum_week="6">
+         >
 
         </journeycalendar.jessie.com.calendarlib.journey.week.WeekCalendar>
 

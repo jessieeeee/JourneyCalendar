@@ -141,10 +141,6 @@ class MonthView extends View {
         flagPreBgColor=typedArray.getColor(R.styleable.MonthCalendarView_flagPreBgColor_month,ContextCompat.getColor(context,R.color.white));
         flagNormalBgColor=typedArray.getColor(R.styleable.MonthCalendarView_flagNormalBgColor_month,ContextCompat.getColor(context,R.color.default_orange));
         mDrawRect = typedArray.getBoolean(R.styleable.MonthCalendarView_isRoundRect_month, false);
-        int preMonthNum = typedArray.getInteger(R.styleable.MonthCalendarView_preMonthNum_month,2);
-        DateUtil.setPreMonthNum(preMonthNum);
-        int nextMonthNum = typedArray.getInteger(R.styleable.MonthCalendarView_nextMonthNum_month,2);
-        DateUtil.setNextMonthNum(nextMonthNum);
 
         flag = typedArray.getString(R.styleable.MonthCalendarView_flagTextStr_month);
         if(TextUtils.isEmpty(flag)){

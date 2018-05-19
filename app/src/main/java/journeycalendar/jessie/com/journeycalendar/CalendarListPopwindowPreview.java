@@ -1,14 +1,16 @@
 package journeycalendar.jessie.com.journeycalendar;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
+import org.joda.time.DateTime;
+
 import java.util.List;
 
+import journeycalendar.jessie.com.calendarlib.journey.DateUtil;
 import journeycalendar.jessie.com.calendarlib.journey.all.CalendarDay;
 import journeycalendar.jessie.com.calendarlib.journey.all.MonthCalendarController;
 import journeycalendar.jessie.com.calendarlib.journey.all.MonthCalendarView;
@@ -64,24 +66,24 @@ public class CalendarListPopwindowPreview {
 
     }
 
-    public void goMonth(){
-        moveToPosition(0);
-    }
+
     /**
      * 滚动到当前月
      */
-//    public void goMonth(){
-//        int offset=0;
-//        Calendar calendar = Calendar.getInstance();
-//        int year=calendar.get(Calendar.YEAR);
-//        // 当前年等于月日历开始年
-//        if(year== monthCalendarView.getStartYear()){
-//            offset=calendar.get(Calendar.MONTH)- DateUtil.getFirstMonth();
-//        }else{
-//            offset=(12-(DateUtil.getFirstMonth()-1))+calendar.get(Calendar.MONTH)-1;
-//        }
-//        moveToPosition(offset);
-//    }
+    public void goMonth(DateTime clickDateTime){
+        int offset=0;
+        // 当前年等于月日历开始年
+        if(clickDateTime.getYear()== DateUtil.getStartYear()){
+            offset=clickDateTime.getMonthOfYear()- DateUtil.getFirstMonth();
+        }else{
+            // 相差一年以上
+            if ( clickDateTime.getYear() - DateUtil.getStartYear() - 1 > 0) {
+                offset = (clickDateTime.getYear() - DateUtil.getStartYear() -1 )*12;
+            }
+            offset =  offset + (11 - DateUtil.getFirstMonth()) + clickDateTime.getMonthOfYear();
+        }
+        moveToPosition(offset);
+    }
 
     /**
      * 初始化popupwindow
@@ -101,7 +103,6 @@ public class CalendarListPopwindowPreview {
 
             @Override
             public void onDayOfMonthSelected(int year, int month, int day) {
-                Log.e("kosmos", "onDayOfMonthSelected:" + day + " / " + month + " / " + year);
                 if (listener != null) {
                     listener.onCalendarSelect(year, month, day);
                 }

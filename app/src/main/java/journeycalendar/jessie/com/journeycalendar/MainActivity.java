@@ -2,6 +2,7 @@ package journeycalendar.jessie.com.journeycalendar;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.KeyEvent;
@@ -55,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
         initRecycleView();
         setDefault();
         setListener();
-        clickDateTime=new DateTime();
-        journey_month.setText((DateUtil.getCurWeekDayDate().getMonth() + 1 )+ "");
+        clickDateTime=DateUtil.getCurWeekDayDateTime();
+        journey_month.setText((DateUtil.getCurWeekDay().get(Calendar.MONTH) + 1 )+ "");
         journey_data_title.setText(OtherUtils.formatDate(DateUtil.getCurWeekDayDate()));
 //        weekCalendar = WeekCalendar.newInstance(context)
 //                .setSelectedBgColor(ContextCompat.getColor(context, R.color.colorAccent))
@@ -112,14 +113,14 @@ public class MainActivity extends AppCompatActivity {
         text_today.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (preview != null && preview.isShow()) {
-                    preview.goMonth();
-                } else {
-                    journey_data_title.setText(OtherUtils.formatDate(DateUtil.getCurWeekDayDate()));
-                    weekCalendar.reset();
-                    journey_month.setText((DateUtil.getCurWeekDayDate().getMonth() + 1) + "");
-                    weekCalendar.setSelectedDate(new DateTime());
+                if (preview != null) {
+                    preview.goMonth(clickDateTime);
                 }
+                clickDateTime = DateUtil.getCurWeekDayDateTime();
+                journey_data_title.setText(OtherUtils.formatDate(DateUtil.getCurWeekDayDate()));
+                weekCalendar.reset();
+                journey_month.setText((DateUtil.getCurWeekDay().get(Calendar.MONTH) + 1) + "");
+                weekCalendar.setSelectedDate(DateUtil.getCurWeekDayDateTime());
             }
         });
         img_back.setOnClickListener(new View.OnClickListener() {
@@ -135,9 +136,9 @@ public class MainActivity extends AppCompatActivity {
         journey_month_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                preview.goMonth();
                 Calendar click=clickDateTime.toCalendar(new Locale("zh", "ZH"));
                 preview.setSelect(new CalendarDay(click.get(Calendar.YEAR),click.get(Calendar.MONTH),click.get(Calendar.DAY_OF_MONTH)));
+                preview.goMonth(clickDateTime);
                 preview.showPop(rl_bar);
             }
         });
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
     private void initRecycleView() {
         journey_events.setLayoutManager(new LinearLayoutManager(context));
         journey_events.setEmptyView(ly_default);
-        journey_events.addItemDecoration(new RecycleViewDivider(context, LinearLayoutManager.HORIZONTAL, DensityUtil.dip2px(context,10), getResources().getColor(R.color.default_bg)));
+        journey_events.addItemDecoration(new RecycleViewDivider(context, LinearLayoutManager.HORIZONTAL, DensityUtil.dip2px(context,10), ContextCompat.getColor(context,R.color.default_bg)));
         journeyListAdapter = new JourneyListAdapter();
         journey_events.setAdapter(journeyListAdapter);
     }
@@ -187,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         journeyDates = new ArrayList<>();
 
         for(int i=0;i<10;i++){
-            DateTime dateTime=new DateTime();
+            DateTime dateTime= DateUtil.getCurWeekDayDateTime();
             int days= (int) (Math.random()*30);
             days=days*(days%2==0?1:-1);
             dateTime=dateTime.plusDays(days);

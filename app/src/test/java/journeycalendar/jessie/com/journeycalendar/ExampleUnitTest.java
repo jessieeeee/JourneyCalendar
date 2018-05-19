@@ -2,7 +2,9 @@ package journeycalendar.jessie.com.journeycalendar;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import journeycalendar.jessie.com.calendarlib.journey.DateUtil;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -14,4 +16,11 @@ public class ExampleUnitTest {
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void testMyRange(){
+        DateUtil.setMonthRange(20,20);
+    }
+
+
 }
