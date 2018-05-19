@@ -31,7 +31,7 @@ dependencies {
 ```java
 DateUtil.setCurState(DYNAMIC); //Dynamic setting range
 // if you set dynamic range, you should set these
- setMonthRange(3,6); //previous three months,next six months
+setMonthRange(3,6); //previous three months,next six months
 DateUtil.setCurState(CUSTOM); //custom range
 // if you set custom range, you should set these
 DateUtil.setStartYear(2019);
@@ -64,10 +64,6 @@ DateUtil.setCurDay(2019,1,12);
         <attr name="hideWeekNum"  format="boolean"/>
         <!--今日文字颜色-->
         <attr name="todayTextColor_week" format="color"/>
-        <!--显示过去月数-->
-        <attr name="preMonthNum_week" format="integer"/>
-        <!--显示未来月数-->
-        <attr name="nextMonthNum_week" format="integer"/>
         <!--今日与选择日是否为矩形-->
         <attr name="isRoundRect_week" format="boolean"/>
         <!--标记文本-->
@@ -112,11 +108,6 @@ DateUtil.setCurDay(2019,1,12);
         <attr name="calendarHeight" format="dimension" />
         <!--今日与选择日是否为矩形-->
         <attr name="isRoundRect_month" format="boolean" />
-        <!--显示过去月数-->
-        <attr name="preMonthNum_month" format="integer"/>
-        <!--显示未来月数-->
-        <attr name="nextMonthNum_month" format="integer"/>
-
         <!--标记文本颜色-->
         <attr name="flagTextColor_month" format="color"/>
         <!--标记文本已过背景颜色-->
