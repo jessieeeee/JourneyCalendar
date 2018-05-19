@@ -25,35 +25,34 @@ public class DateUtil {
 
     // 指定日期范围需要以下设置
     private static int startMonth = 0 ; //开始月份
-    private static int startYear = 2019 ;//开始年份
-    private static int endMonth = 1 ; //结束月份
-    private static int endYear = 2019 ; //结束年份
+    private static int startYear = 0 ;//开始年份
+    private static int endMonth = 0 ; //结束月份
+    private static int endYear = 0 ; //结束年份
 
     public static int DYNAMIC = 0; //动态设置日历范围，以当前日为基准，前X个月，后Y个月
     public static int CUSTOM = 1;  //指定日期范围，2019-1 到 2019-2月
     private static int curState = DYNAMIC; // 当前模式默认动态范围
-
     static {
 //        setCurState(CUSTOM);
-//        setStartYear(2016);
-//        setEndYear(2019);
-//        setStartMonth(12);
-//        setEndMonth(12);
-        setMonthRange(3,6);
+//        setStartYear(2015);
+//        setEndYear(2017);
+//        setStartMonth(9);
+//        setEndMonth(4);
+//        setCurDay(2016,5,13);
+        setMonthRange(6,6);
+//        setCurDay(2016,3,5);
     }
 
-    public static int getCurState(){
-        return DateUtil.curState;
+    private static void checkToday(){
+        setCurDay(startYear,startMonth+1,12);
     }
+
     /**
      * 设置当前模式
      * @param curState
      */
     public static void setCurState(int curState) {
         DateUtil.curState = curState;
-        if (curState == CUSTOM) {
-           setCurDay(2019,1,12);
-        }
     }
 
     /**
@@ -67,6 +66,7 @@ public class DateUtil {
             startMonth = startMonth - 1;
         }
         DateUtil.startMonth = startMonth;
+        checkToday();
     }
 
     /**
@@ -75,6 +75,7 @@ public class DateUtil {
      */
     public static void setStartYear(int startYear) {
         DateUtil.startYear = startYear;
+        checkToday();
     }
 
     /**
@@ -97,6 +98,7 @@ public class DateUtil {
     public static void setEndYear(int endYear) {
         if (endYear - startYear < 0) {
             endYear = startYear;
+            System.out.println("end year must be less than start year!");
         }
         DateUtil.endYear = endYear;
     }
@@ -108,12 +110,16 @@ public class DateUtil {
      * @param day 日
      */
     public static void setCurDay(int year,int month,int day){
+//        Log.i("123", "setCurDay: "+year+":"+month);
         if (month-1 < 0){
             month = 0;
         } else {
             month = month-1;
         }
         curDay.set(year,month,day);
+        if (curState == DYNAMIC) {
+            setMonthRange(preMonthNum,nextMonthNum);
+        }
     }
 
     /**
@@ -130,7 +136,7 @@ public class DateUtil {
         }
         preMonthNum = pre;
         nextMonthNum = next;
-        Calendar c = getCurWeekDay();
+        Calendar c = getCurDay();
         int preOffsetYear = pre / 12;
         startYear = c.get(Calendar.YEAR);
         // 确定开始年
@@ -157,10 +163,10 @@ public class DateUtil {
             endMonth = endMonth - 11 - 1;
             endYear ++ ;
         }
-        System.out.println(startYear);
-        System.out.println(startMonth);
-        System.out.println(endYear);
-        System.out.println(endMonth);
+//        System.out.println(startYear);
+//        System.out.println(startMonth);
+//        System.out.println(endYear);
+//        System.out.println(endMonth);
 
     }
 
@@ -176,7 +182,7 @@ public class DateUtil {
             int showNum = 0;
             // 同一年
             if ( endYear == startYear){
-                showNum = endMonth - startMonth;
+                showNum = endMonth - startMonth + 1;
             } else { //不同年
                 // 相差一年以上
                 if ( endYear - startYear - 1 > 0) {
@@ -188,24 +194,25 @@ public class DateUtil {
         }
     }
 
-    public static Date getCurWeekDayDate() {
-        return getCurWeekDay().getTime();
+    public static Date getCurDayDate() {
+        return getCurDay().getTime();
     }
 
-    public static DateTime getCurWeekDayDateTime() {
+    public static DateTime getCurDayDateTime() {
         if (curDayDateTime==null){
-            curDayDateTime=new DateTime(curDay);
+            curDayDateTime=new DateTime(getCurDay());
         }
         return curDayDateTime;
     }
 
-    public static Calendar getCurWeekDay() {
+    public static Calendar getCurDay() {
+//        Log.i("123", "getCurDay: "+curDay.get(Calendar.YEAR)+":"+curDay.get(Calendar.MONTH)+":"+curDay.get(Calendar.DAY_OF_MONTH)+":");
        return curDay;
     }
 
     //计算当前页数
     public static int countCurPage(){
-        //初始化开始时间
+        //开始时间
         Calendar c= Calendar.getInstance();
         int startYear=getStartYear();
         int startMonth=getFirstMonth();
@@ -214,7 +221,8 @@ public class DateUtil {
         if(firstDay.get(DateTimeFieldType.dayOfWeek())!=DateTimeConstants.SUNDAY){//不是星期天
             firstDay=firstDay.withDayOfWeek(DateTimeConstants.SUNDAY).plusDays(-7);//上个星期天
         }
-        DateTime endDay=getCurWeekDayDateTime();
+        //当前时间
+        DateTime endDay= getCurDayDateTime();
         if(endDay.get(DateTimeFieldType.dayOfWeek())!=DateTimeConstants.SUNDAY){//不是星期天
             endDay=endDay.withDayOfWeek(DateTimeConstants.SATURDAY);//当前周六
         }else{
@@ -225,7 +233,7 @@ public class DateUtil {
 
     //计算总页数
     public static int countPageNum(){
-        //初始化开始时间
+        //开始时间
         Calendar c= Calendar.getInstance();
         int startYear=getStartYear();
         int startMonth=getFirstMonth();
@@ -234,6 +242,7 @@ public class DateUtil {
         if(firstDay.get(DateTimeFieldType.dayOfWeek())!=DateTimeConstants.SUNDAY){//不是星期天
             firstDay=firstDay.withDayOfWeek(DateTimeConstants.SUNDAY).plusDays(-7);//上个星期天
         }
+        //结束时间
         Calendar end= Calendar.getInstance();
         //初始化结束时间
         int endYear=getEndYear();

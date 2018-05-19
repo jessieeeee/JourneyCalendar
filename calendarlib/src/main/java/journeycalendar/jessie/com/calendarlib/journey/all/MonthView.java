@@ -36,7 +36,6 @@ import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
-import android.text.format.Time;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -205,11 +204,11 @@ class MonthView extends View {
     }
 
     private boolean sameDay(int monthDay) {
-        return (mYear == DateUtil.getCurWeekDay().get(Calendar.YEAR)) && (mMonth == DateUtil.getCurWeekDay().get(Calendar.MONTH)) && (monthDay == DateUtil.getCurWeekDay().get(Calendar.DAY_OF_MONTH));
+        return (mYear == DateUtil.getCurDay().get(Calendar.YEAR)) && (mMonth == DateUtil.getCurDay().get(Calendar.MONTH)) && (monthDay == DateUtil.getCurDay().get(Calendar.DAY_OF_MONTH));
     }
 
     private boolean prevDay(int monthDay) {
-        return ((mYear < DateUtil.getCurWeekDay().get(Calendar.YEAR))) || (mYear == DateUtil.getCurWeekDay().get(Calendar.YEAR) && mMonth < DateUtil.getCurWeekDay().get(Calendar.MONTH)) || (mMonth == DateUtil.getCurWeekDay().get(Calendar.MONTH) && monthDay < DateUtil.getCurWeekDay().get(Calendar.DAY_OF_MONTH));
+        return ((mYear < DateUtil.getCurDay().get(Calendar.YEAR))) || (mYear == DateUtil.getCurDay().get(Calendar.YEAR) && mMonth < DateUtil.getCurDay().get(Calendar.MONTH)) || (mMonth == DateUtil.getCurDay().get(Calendar.MONTH) && monthDay < DateUtil.getCurDay().get(Calendar.DAY_OF_MONTH));
     }
 
     //绘制日期

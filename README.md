@@ -28,6 +28,7 @@ dependencies {
 ## How to Use
 ### Configuration tool
 - DateUtil
+you should set this before container render
 ```java
 DateUtil.setCurState(DYNAMIC); //Dynamic setting range
 // if you set dynamic range, you should set these
@@ -38,7 +39,7 @@ DateUtil.setStartYear(2019);
 DateUtil.setEndYear(2019);
 DateUtil.setStartMonth(1);
 DateUtil.setEndMonth(2);
-// you can set today
+// you can set today , but the call must be after set range (dynamic or custom)
 DateUtil.setCurDay(2019,1,12);
 ```
 ### attrs list

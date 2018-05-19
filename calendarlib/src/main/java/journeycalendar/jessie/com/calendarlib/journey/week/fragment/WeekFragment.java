@@ -36,7 +36,7 @@ public class WeekFragment extends Fragment {
     public static String DATE_KEY = "date_key";
     private GridView gridView;
     private WeekAdapter weekAdapter;
-    public static DateTime selectedDateTime = DateUtil.getCurWeekDayDateTime();
+    public static DateTime selectedDateTime = DateUtil.getCurDayDateTime();
     private DateTime startDate;
     private DateTime endDate;
     private boolean isVisible;

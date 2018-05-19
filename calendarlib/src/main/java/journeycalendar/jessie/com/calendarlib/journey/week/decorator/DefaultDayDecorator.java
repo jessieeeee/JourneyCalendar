@@ -85,7 +85,7 @@ public class DefaultDayDecorator implements DayDecorator {
         // solidCircle.mutate().setAlpha(200);
         //holoCircle.mutate().setAlpha(200);
 
-        DateTime calendarStartDate = DateUtil.getCurWeekDayDateTime();
+        DateTime calendarStartDate = DateUtil.getCurDayDateTime();
         if (selectedDateTime != null && !selectedDateTime.toLocalDate().equals(dateTime.toLocalDate())) { //当前时间未选中
             if (dateTime.toLocalDate().isBefore(calendarStartDate.toLocalDate())) {//在今天之前
                 dayTextView.setTextColor(textColorPre);
@@ -112,7 +112,7 @@ public class DefaultDayDecorator implements DayDecorator {
     public void drawFlag(TextView flagText, DateTime dateTime, List<String> flagDates) {
         if (flagDates != null) {
             Iterator<String> it = flagDates.iterator();
-            DateTime calendarStartDate = DateUtil.getCurWeekDayDateTime();
+            DateTime calendarStartDate = DateUtil.getCurDayDateTime();
             while (it.hasNext()) {
                 String date = it.next();
                 String curDate = OtherUtils.formatDate(dateTime.toDate(), "yyyy-MM-dd");

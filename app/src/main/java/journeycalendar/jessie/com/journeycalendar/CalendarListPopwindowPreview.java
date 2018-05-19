@@ -74,7 +74,7 @@ public class CalendarListPopwindowPreview {
         int offset=0;
         // 当前年等于月日历开始年
         if(clickDateTime.getYear()== DateUtil.getStartYear()){
-            offset=clickDateTime.getMonthOfYear()- DateUtil.getFirstMonth();
+            offset = clickDateTime.getMonthOfYear() - DateUtil.getFirstMonth() - 1;
         }else{
             // 相差一年以上
             if ( clickDateTime.getYear() - DateUtil.getStartYear() - 1 > 0) {

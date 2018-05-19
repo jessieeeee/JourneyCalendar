@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
         initRecycleView();
         setDefault();
         setListener();
-        clickDateTime=DateUtil.getCurWeekDayDateTime();
-        journey_month.setText((DateUtil.getCurWeekDay().get(Calendar.MONTH) + 1 )+ "");
-        journey_data_title.setText(OtherUtils.formatDate(DateUtil.getCurWeekDayDate()));
+        clickDateTime=DateUtil.getCurDayDateTime();
+        journey_month.setText((DateUtil.getCurDay().get(Calendar.MONTH) + 1 )+ "");
+        journey_data_title.setText(OtherUtils.formatDate(DateUtil.getCurDayDate()));
 //        weekCalendar = WeekCalendar.newInstance(context)
 //                .setSelectedBgColor(ContextCompat.getColor(context, R.color.colorAccent))
 //                .setDayTextColorPre( Color.GRAY)
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         setData();
-        journeyListAdapter.setData(setCurJourneyList(DateUtil.getCurWeekDayDate()));//设置当天的行程数据
+        journeyListAdapter.setData(setCurJourneyList(DateUtil.getCurDayDate()));//设置当天的行程数据
     }
 
     private void setListener() {
@@ -116,11 +116,11 @@ public class MainActivity extends AppCompatActivity {
                 if (preview != null) {
                     preview.goMonth(clickDateTime);
                 }
-                clickDateTime = DateUtil.getCurWeekDayDateTime();
-                journey_data_title.setText(OtherUtils.formatDate(DateUtil.getCurWeekDayDate()));
+                clickDateTime = DateUtil.getCurDayDateTime();
+                journey_data_title.setText(OtherUtils.formatDate(DateUtil.getCurDayDate()));
                 weekCalendar.reset();
-                journey_month.setText((DateUtil.getCurWeekDay().get(Calendar.MONTH) + 1) + "");
-                weekCalendar.setSelectedDate(DateUtil.getCurWeekDayDateTime());
+                journey_month.setText((DateUtil.getCurDay().get(Calendar.MONTH) + 1) + "");
+                weekCalendar.setSelectedDate(DateUtil.getCurDayDateTime());
             }
         });
         img_back.setOnClickListener(new View.OnClickListener() {
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         journeyDates = new ArrayList<>();
 
         for(int i=0;i<10;i++){
-            DateTime dateTime= DateUtil.getCurWeekDayDateTime();
+            DateTime dateTime= DateUtil.getCurDayDateTime();
             int days= (int) (Math.random()*30);
             days=days*(days%2==0?1:-1);
             dateTime=dateTime.plusDays(days);
